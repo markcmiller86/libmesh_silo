@@ -201,7 +201,14 @@ if LIBMESH_ENABLE_NANOFLANN
   # header-only library - no library dependencies
 endif
 
-
+if LIBMESH_ENABLE_SILO
+  SUBDIRS    += silo
+  opt_libs   += silo/libopt.la 
+  dbg_libs   += silo/libdbg.la 
+  devel_libs += silo/libdevel.la 
+  prof_libs  += silo/libprof.la 
+  oprof_libs += silo/liboprof.la 
+endif
 
 ######################################################################
 #

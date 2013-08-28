@@ -372,7 +372,16 @@ AM_CONDITIONAL(LIBMESH_ENABLE_GMV, test x$enablegmv = xyes)
 AC_CONFIG_FILES([contrib/gmv/Makefile])
 # -------------------------------------------------------------
 
-
+# -------------------------------------------------------------
+# Silo -- file I/O API is enabled by default (it is distributed in contrib)
+# -------------------------------------------------------------
+CONFIGURE_SILO
+if (test x$enablesilo = xyes); then
+  libmesh_contrib_INCLUDES="$SILO_INCLUDE $libmesh_contrib_INCLUDES"
+fi
+AM_CONDITIONAL(LIBMESH_ENABLE_SILO, test x$enablesilo = xyes)
+AC_CONFIG_FILES([contrib/silo/Makefile])
+# -------------------------------------------------------------
 
 # -------------------------------------------------------------
 # VTK -- Mesh I/O API is enabled by default

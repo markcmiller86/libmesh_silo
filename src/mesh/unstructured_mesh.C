@@ -51,6 +51,7 @@
 #include "libmesh/legacy_xdr_io.h"
 #include "libmesh/vtk_io.h"
 #include "libmesh/abaqus_io.h"
+#include "libmesh/silo_io.h"
 
 #include LIBMESH_INCLUDE_UNORDERED_MAP
 
@@ -576,6 +577,9 @@ void UnstructuredMesh::read (const std::string& name,
 	       name.rfind(".n")   < name.size())
         Nemesis_IO(*this).read (name);
 
+      else if (name.rfind(".silo") < name.size())
+        SiloIO(*this).read (name);
+
     }
 
   // Serial mesh formats
@@ -673,6 +677,10 @@ void UnstructuredMesh::read (const std::string& name,
 	  else if (new_name.rfind(".inp") < new_name.size())
 	    AbaqusIO(*this).read(new_name);
 
+	  else if (new_name.rfind(".silo") < new_name.size())
+	    SiloIO(*this).read(new_name);
+
+
 	  else
 	    {
 	      libMesh::err << " ERROR: Unrecognized file extension: " << name
@@ -690,6 +698,7 @@ void UnstructuredMesh::read (const std::string& name,
 			<< "     *.inp  -- Abaqus .inp format\n"
 			<< "     *.xda  -- libMesh ASCII format\n"
 			<< "     *.xdr  -- libMesh binary format\n"
+			<< "     *.silo -- LLNL's Silo format\n"
 			<< "     *.gz   -- any above format gzipped\n"
 			<< "     *.bz2  -- any above format bzip2'ed\n"
 			<< "     *.xz   -- any above format xzipped\n"
@@ -744,6 +753,9 @@ void UnstructuredMesh::write (const std::string& name,
       else if (name.rfind(".nem") < name.size() ||
                name.rfind(".n")   < name.size())
         Nemesis_IO(*this).write(name);
+
+      else if (name.rfind(".silo") < name.size())
+	SiloIO(*this,true).write(name);
     }
 
   // serial file formats
@@ -828,6 +840,9 @@ void UnstructuredMesh::write (const std::string& name,
 	else if (new_name.rfind(".vtu") < new_name.size())
 	  VTKIO(*this).write (new_name);
 
+	else if (new_name.rfind(".silo") < new_name.size())
+	  SiloIO(*this).write (new_name);
+
 	else
 	  {
 	    libMesh::err
@@ -851,6 +866,7 @@ void UnstructuredMesh::write (const std::string& name,
               << "     *.vtu   -- VTK (paraview-readable) format\n"
               << "     *.xda   -- libMesh ASCII format\n"
               << "     *.xdr   -- libMesh binary format,\n"
+              << "     *.silo  -- LLNL's Silo format,\n"
               << std::endl
               << "\n Exiting without writing output\n";
 	  }
