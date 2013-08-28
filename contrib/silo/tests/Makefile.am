@@ -126,7 +126,6 @@ AM_CPPFLAGS = \
  -I$(srcdir)/../src/silo \
  -I$(includedir)
 #quad_CPPFLAGS = $(AM_CPPFLAGS)
-PDBTESTS =
 if INSTALL_LITE_HEADERS
 testpdb_CPPFLAGS = -DPDB_LITE $(AM_CPPFLAGS)
 pdbtst_CPPFLAGS = -DPDB_LITE $(AM_CPPFLAGS)

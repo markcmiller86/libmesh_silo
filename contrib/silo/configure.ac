@@ -458,8 +458,8 @@ dnl
 DEFAULT_PYTHONMODULE=""
 DEFAULT_BROWSER="browser"
 DEFAULT_SILEX="silex"
-DEFAULT_HZIP="hzip"
-DEFAULT_FPZIP="fpzip"
+DEFAULT_HZIP=""
+DEFAULT_FPZIP=""
 DEFAULT_FORTRAN="fortran"
 default_detect_readline="yes"
 
@@ -1329,11 +1329,7 @@ AM_CONDITIONAL(ZLIB_AVAILABLE, test -n "$ZLIB")
 AM_CONDITIONAL(CXX_LINK_NEEDED, test "$enable_shared" = "no" -a \( -n "$FPZIP" -o -n "$HZIP" \))
 AC_CONFIG_FILES([
             Makefile
-            SiloWindows/Makefile
-            svn_bin/Makefile
             config/Makefile
-            config-site/Makefile
-            docs/Makefile
             src/Makefile
             src/score/Makefile
             src/pdb/Makefile
@@ -1353,12 +1349,6 @@ AC_CONFIG_FILES([
             tools/python/Makefile
             tools/silex/Makefile
             tools/silock/Makefile])
-if test -n "$HZIP"; then
-  AC_CONFIG_FILES([src/hzip/Makefile])
-fi
-if test -n "$FPZIP"; then
-  AC_CONFIG_FILES([src/fpzip/Makefile])
-fi
 if test -n "$HDF5_DRV"; then
   AC_CONFIG_FILES([src/libsiloh5.settings])
 else

@@ -13,7 +13,24 @@ AC_DEFUN([CONFIGURE_SILO],
 		 esac],
 		 [enablesilo=$enableoptional])
 
+  AC_ARG_ENABLE(silo-fortran,
+                AC_HELP_STRING([--enable-silo-fortran],
+                               [build with Silo Fortran API support]),
+                [case "${enableval}" in
+                 yes)  enablesilofortran=yes; ;;
+                  no)  enablesilofortran=no;  ;;
+                   *)  AC_MSG_ERROR(bad value ${enableval} for --enable-silo-fortran) ;;
+                 esac],
+                 [enablesilofortran=$enablefortran])
 
+  if (test "x$enablesilofortran" = "xyes"); then
+     AC_MSG_RESULT(<<< Configuring library with Silo Fortran API >>>)
+  fi
+
+  if (test "x$enablehdf5" = "xyes"); then
+     #  pass --disable-netcdf-4 to the subpackage so that we do not require HDF-5
+     libmesh_subpackage_arguments="$libmesh_subpackage_arguments --with-hdf5=${HDF5_PREFIX}/include,${HDF5_PREFIX}/lib"
+  fi
 
   dnl The Silo API is distributed with libmesh, so we don't have to guess
   dnl where it might be installed...
@@ -26,8 +43,17 @@ AC_DEFUN([CONFIGURE_SILO],
      SILO_INCLUDE=""
      SILO_LIBRARY=""
      enablesilo=no
+     enablesilofortran=no
   fi
 
+  # allow opt-out for nested subpackages
+  if (test "x$enablenested" = "xyes"); then
+     AC_CONFIG_SUBDIRS([contrib/silo])
+  fi
+
+#  AC_CONFIG_FILES([contrib/silo/Makefile])
+#  AC_CONFIG_FILES([contrib/silo/src/silo/silo.h])
   AC_SUBST(SILO_INCLUDE)
   AC_SUBST(SILO_LIBRARY)
+  AM_CONDITIONAL(SILO_FORTRAN_API, test x$enablesilofortran = xyes)
 ])

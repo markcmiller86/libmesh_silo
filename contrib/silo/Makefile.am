@@ -80,8 +80,7 @@ MAINTAINERCLEANFILES = Makefile.in\
 
 ## We need `.' in SUBDIRS because we want `check' to build `.' first.
 SUBDIRS = . src tools tests
-DIST_SUBDIRS = . config config-site \
-  svn_bin docs src tests tools SiloWindows
+DIST_SUBDIRS = . config src tests tools
 
 help: config/make.help
 	cat $(srcdir)/config/make.help

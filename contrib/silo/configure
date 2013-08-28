@@ -2941,8 +2941,8 @@ fi
 DEFAULT_PYTHONMODULE=""
 DEFAULT_BROWSER="browser"
 DEFAULT_SILEX="silex"
-DEFAULT_HZIP="hzip"
-DEFAULT_FPZIP="fpzip"
+DEFAULT_HZIP=""
+DEFAULT_FPZIP=""
 DEFAULT_FORTRAN="fortran"
 default_detect_readline="yes"
 
@@ -30518,16 +30518,8 @@ else
   CXX_LINK_NEEDED_FALSE=
 fi
 
-ac_config_files="$ac_config_files Makefile SiloWindows/Makefile svn_bin/Makefile config/Makefile config-site/Makefile docs/Makefile src/Makefile src/score/Makefile src/pdb/Makefile src/silo/Makefile src/silo/silo.h src/debug/Makefile src/netcdf/Makefile src/pdb_drv/Makefile src/pdbp_drv/Makefile src/hdf5_drv/Makefile src/taurus/Makefile src/unknown/Makefile src/filters/Makefile tests/Makefile tools/Makefile tools/browser/Makefile tools/python/Makefile tools/silex/Makefile tools/silock/Makefile"
+ac_config_files="$ac_config_files Makefile config/Makefile src/Makefile src/score/Makefile src/pdb/Makefile src/silo/Makefile src/silo/silo.h src/debug/Makefile src/netcdf/Makefile src/pdb_drv/Makefile src/pdbp_drv/Makefile src/hdf5_drv/Makefile src/taurus/Makefile src/unknown/Makefile src/filters/Makefile tests/Makefile tools/Makefile tools/browser/Makefile tools/python/Makefile tools/silex/Makefile tools/silock/Makefile"
 
-if test -n "$HZIP"; then
-  ac_config_files="$ac_config_files src/hzip/Makefile"
-
-fi
-if test -n "$FPZIP"; then
-  ac_config_files="$ac_config_files src/fpzip/Makefile"
-
-fi
 if test -n "$HDF5_DRV"; then
   ac_config_files="$ac_config_files src/libsiloh5.settings"
 
@@ -31820,11 +31812,7 @@ do
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "libtool") CONFIG_COMMANDS="$CONFIG_COMMANDS libtool" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
-    "SiloWindows/Makefile") CONFIG_FILES="$CONFIG_FILES SiloWindows/Makefile" ;;
-    "svn_bin/Makefile") CONFIG_FILES="$CONFIG_FILES svn_bin/Makefile" ;;
     "config/Makefile") CONFIG_FILES="$CONFIG_FILES config/Makefile" ;;
-    "config-site/Makefile") CONFIG_FILES="$CONFIG_FILES config-site/Makefile" ;;
-    "docs/Makefile") CONFIG_FILES="$CONFIG_FILES docs/Makefile" ;;
     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
     "src/score/Makefile") CONFIG_FILES="$CONFIG_FILES src/score/Makefile" ;;
     "src/pdb/Makefile") CONFIG_FILES="$CONFIG_FILES src/pdb/Makefile" ;;
@@ -31844,8 +31832,6 @@ do
     "tools/python/Makefile") CONFIG_FILES="$CONFIG_FILES tools/python/Makefile" ;;
     "tools/silex/Makefile") CONFIG_FILES="$CONFIG_FILES tools/silex/Makefile" ;;
     "tools/silock/Makefile") CONFIG_FILES="$CONFIG_FILES tools/silock/Makefile" ;;
-    "src/hzip/Makefile") CONFIG_FILES="$CONFIG_FILES src/hzip/Makefile" ;;
-    "src/fpzip/Makefile") CONFIG_FILES="$CONFIG_FILES src/fpzip/Makefile" ;;
     "src/libsiloh5.settings") CONFIG_FILES="$CONFIG_FILES src/libsiloh5.settings" ;;
     "src/libsilo.settings") CONFIG_FILES="$CONFIG_FILES src/libsilo.settings" ;;
 
