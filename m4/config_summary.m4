@@ -146,6 +146,12 @@ if (test "x$enableoptional" = "xyes"); then
   fi
   echo '  'pthreads......................... : $enablepthreads
   echo '  'sfcurves......................... : $enablesfc
+  echo '  'silo............................. : $enablesilo
+  if (test "x$enablehdf5" == "xyes"); then
+  echo '     'drivers....................... : PDB, HDF5 
+  else
+  echo '     'drivers....................... : PDB
+  fi
   echo '  'slepc............................ : $enableslepc
   echo '  'tbb.............................. : $enabletbb
   echo '  'c++ threads...................... : $enablecppthreads

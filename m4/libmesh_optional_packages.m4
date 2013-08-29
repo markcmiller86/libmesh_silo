@@ -373,17 +373,6 @@ AC_CONFIG_FILES([contrib/gmv/Makefile])
 # -------------------------------------------------------------
 
 # -------------------------------------------------------------
-# Silo -- file I/O API is enabled by default (it is distributed in contrib)
-# -------------------------------------------------------------
-CONFIGURE_SILO
-if (test x$enablesilo = xyes); then
-  libmesh_contrib_INCLUDES="$SILO_INCLUDE $libmesh_contrib_INCLUDES"
-fi
-AM_CONDITIONAL(LIBMESH_ENABLE_SILO, test x$enablesilo = xyes)
-AC_CONFIG_FILES([contrib/silo/Makefile])
-# -------------------------------------------------------------
-
-# -------------------------------------------------------------
 # VTK -- Mesh I/O API is enabled by default
 # -------------------------------------------------------------
 CONFIGURE_VTK
@@ -486,7 +475,15 @@ AM_CONDITIONAL(LIBMESH_ENABLE_NETCDF_V4, test x$netcdfversion = x4)
    # -------------------------------------------------------------
 # -------------------------------------------------------------
 
-
+# -------------------------------------------------------------
+# Silo -- file I/O API is enabled by default (it is distributed in contrib)
+# Must be *after* HDF5 so can test for HDF5 as part of Silo
+# -------------------------------------------------------------
+CONFIGURE_SILO
+if (test x$enablesilo = xyes); then
+  libmesh_contrib_INCLUDES="$SILO_INCLUDE $libmesh_contrib_INCLUDES"
+fi
+AM_CONDITIONAL(LIBMESH_ENABLE_SILO, test x$enablesilo = xyes)
 
 # -------------------------------------------------------------
 # libHilbert -- distributed in ./contrib,

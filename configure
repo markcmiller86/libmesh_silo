@@ -831,6 +831,12 @@ LIBMESH_ENABLE_LIBHILBERT_FALSE
 LIBMESH_ENABLE_LIBHILBERT_TRUE
 LIBHILBERT_LIBRARY
 LIBHILBERT_INCLUDE
+LIBMESH_ENABLE_SILO_FALSE
+LIBMESH_ENABLE_SILO_TRUE
+SILO_FORTRAN_API_FALSE
+SILO_FORTRAN_API_TRUE
+SILO_LIBRARY
+SILO_INCLUDE
 LIBMESH_ENABLE_NEMESIS_V522_FALSE
 LIBMESH_ENABLE_NEMESIS_V522_TRUE
 LIBMESH_ENABLE_NEMESIS_V309_FALSE
@@ -855,6 +861,7 @@ LIBMESH_ENABLE_NETCDF_V3_TRUE
 LIBMESH_ENABLE_NETCDF_FALSE
 LIBMESH_ENABLE_NETCDF_TRUE
 NETCDF_INCLUDE
+subdirs
 LIBMESH_ENABLE_HDF5_FALSE
 LIBMESH_ENABLE_HDF5_TRUE
 HDF5_PREFIX
@@ -881,13 +888,6 @@ vtkmajor
 vtkversion
 VTK_DIR
 VTK_INCLUDE
-LIBMESH_ENABLE_SILO_FALSE
-LIBMESH_ENABLE_SILO_TRUE
-SILO_FORTRAN_API_FALSE
-SILO_FORTRAN_API_TRUE
-SILO_LIBRARY
-SILO_INCLUDE
-subdirs
 LIBMESH_ENABLE_GMV_FALSE
 LIBMESH_ENABLE_GMV_TRUE
 GMV_LIBRARY
@@ -1264,8 +1264,6 @@ enable_parmetis
 enable_tetgen
 enable_triangle
 enable_gmv
-enable_silo
-enable_silo_fortran
 enable_vtk
 with_vtk_include
 with_vtk_lib
@@ -1280,6 +1278,8 @@ enable_netcdf
 enable_exodus
 enable_exodus_fortran
 enable_nemesis
+enable_silo
+enable_silo_fortran
 enable_libHilbert
 enable_fparser
 with_fparser
@@ -1319,8 +1319,8 @@ VTK_DIR
 HDF5_DIR
 YACC
 YFLAGS'
-ac_subdirs_all='contrib/silo
-contrib/netcdf/v4'
+ac_subdirs_all='contrib/netcdf/v4
+contrib/silo'
 
 # Initialize some variables set by options.
 ac_init_help=
@@ -2035,8 +2035,6 @@ Optional Features:
   --enable-triangle       build with Triangle Delaunay triangulation library
                           support
   --enable-gmv            build with GMV file I/O support
-  --enable-silo           build with Silo file I/O support
-  --enable-silo-fortran   build with Silo Fortran API support
   --enable-vtk            build with VTK file I/O support
   --enable-eigen          build with Eigen linear algebra support
   --enable-glpk           build with GLPK support
@@ -2045,6 +2043,8 @@ Optional Features:
   --enable-exodus         build with ExodusII API support
   --enable-exodus-fortran build with ExodusII Fortran API support
   --enable-nemesis        build with NemesisII API support
+  --enable-silo           build with Silo file I/O support
+  --enable-silo-fortran   build with Silo Fortran API support
   --enable-libHilbert     build with libHilbert, from Chris Hamilton
   --enable-fparser        build with C++ function parser support
   --enable-fparser-optimizer
@@ -41338,99 +41338,6 @@ ac_config_files="$ac_config_files contrib/gmv/Makefile"
 # -------------------------------------------------------------
 
 # -------------------------------------------------------------
-# Silo -- file I/O API is enabled by default (it is distributed in contrib)
-# -------------------------------------------------------------
-
-  # Check whether --enable-silo was given.
-if test "${enable_silo+set}" = set; then
-  enableval=$enable_silo; case "${enableval}" in
-		  yes)  enablesilo=yes ;;
-		   no)  enablesilo=no ;;
- 		    *)  { { $as_echo "$as_me:$LINENO: error: bad value ${enableval} for --enable-silo" >&5
-$as_echo "$as_me: error: bad value ${enableval} for --enable-silo" >&2;}
-   { (exit 1); exit 1; }; } ;;
-		 esac
-else
-  enablesilo=$enableoptional
-fi
-
-
-  # Check whether --enable-silo-fortran was given.
-if test "${enable_silo_fortran+set}" = set; then
-  enableval=$enable_silo_fortran; case "${enableval}" in
-                 yes)  enablesilofortran=yes; ;;
-                  no)  enablesilofortran=no;  ;;
-                   *)  { { $as_echo "$as_me:$LINENO: error: bad value ${enableval} for --enable-silo-fortran" >&5
-$as_echo "$as_me: error: bad value ${enableval} for --enable-silo-fortran" >&2;}
-   { (exit 1); exit 1; }; } ;;
-                 esac
-else
-  enablesilofortran=$enablefortran
-fi
-
-
-  if (test "x$enablesilofortran" = "xyes"); then
-     { $as_echo "$as_me:$LINENO: result: <<< Configuring library with Silo Fortran API >>>" >&5
-$as_echo "<<< Configuring library with Silo Fortran API >>>" >&6; }
-  fi
-
-  if (test "x$enablehdf5" = "xyes"); then
-     #  pass --disable-netcdf-4 to the subpackage so that we do not require HDF-5
-     libmesh_subpackage_arguments="$libmesh_subpackage_arguments --with-hdf5=${HDF5_PREFIX}/include,${HDF5_PREFIX}/lib"
-  fi
-
-      if (test x$enablesilo = xyes); then
-     SILO_INCLUDE="-I\$(top_srcdir)/contrib/silo"
-     SILO_LIBRARY="\$(EXTERNAL_LIBDIR)/libsilo\$(libext)"
-
-cat >>confdefs.h <<\_ACEOF
-#define HAVE_SILO 1
-_ACEOF
-
-     { $as_echo "$as_me:$LINENO: result: <<< Configuring library with Silo support >>>" >&5
-$as_echo "<<< Configuring library with Silo support >>>" >&6; }
-  else
-     SILO_INCLUDE=""
-     SILO_LIBRARY=""
-     enablesilo=no
-     enablesilofortran=no
-  fi
-
-  # allow opt-out for nested subpackages
-  if (test "x$enablenested" = "xyes"); then
-     subdirs="$subdirs contrib/silo"
-
-  fi
-
-#  AC_CONFIG_FILES([contrib/silo/Makefile])
-#  AC_CONFIG_FILES([contrib/silo/src/silo/silo.h])
-
-
-   if test x$enablesilofortran = xyes; then
-  SILO_FORTRAN_API_TRUE=
-  SILO_FORTRAN_API_FALSE='#'
-else
-  SILO_FORTRAN_API_TRUE='#'
-  SILO_FORTRAN_API_FALSE=
-fi
-
-
-if (test x$enablesilo = xyes); then
-  libmesh_contrib_INCLUDES="$SILO_INCLUDE $libmesh_contrib_INCLUDES"
-fi
- if test x$enablesilo = xyes; then
-  LIBMESH_ENABLE_SILO_TRUE=
-  LIBMESH_ENABLE_SILO_FALSE='#'
-else
-  LIBMESH_ENABLE_SILO_TRUE='#'
-  LIBMESH_ENABLE_SILO_FALSE=
-fi
-
-ac_config_files="$ac_config_files contrib/silo/Makefile"
-
-# -------------------------------------------------------------
-
-# -------------------------------------------------------------
 # VTK -- Mesh I/O API is enabled by default
 # -------------------------------------------------------------
 
@@ -43906,6 +43813,93 @@ fi
    # -------------------------------------------------------------
 # -------------------------------------------------------------
 
+# -------------------------------------------------------------
+# Silo -- file I/O API is enabled by default (it is distributed in contrib)
+# Must be *after* HDF5 so can test for HDF5 as part of Silo
+# -------------------------------------------------------------
+
+  # Check whether --enable-silo was given.
+if test "${enable_silo+set}" = set; then
+  enableval=$enable_silo; case "${enableval}" in
+		  yes)  enablesilo=yes ;;
+		   no)  enablesilo=no ;;
+ 		    *)  { { $as_echo "$as_me:$LINENO: error: bad value ${enableval} for --enable-silo" >&5
+$as_echo "$as_me: error: bad value ${enableval} for --enable-silo" >&2;}
+   { (exit 1); exit 1; }; } ;;
+		 esac
+else
+  enablesilo=$enableoptional
+fi
+
+
+  # Check whether --enable-silo-fortran was given.
+if test "${enable_silo_fortran+set}" = set; then
+  enableval=$enable_silo_fortran; case "${enableval}" in
+                 yes)  enablesilofortran=yes; ;;
+                  no)  enablesilofortran=no;  ;;
+                   *)  { { $as_echo "$as_me:$LINENO: error: bad value ${enableval} for --enable-silo-fortran" >&5
+$as_echo "$as_me: error: bad value ${enableval} for --enable-silo-fortran" >&2;}
+   { (exit 1); exit 1; }; } ;;
+                 esac
+else
+  enablesilofortran=$enablefortran
+fi
+
+
+  if (test "x$enablesilofortran" = "xyes"); then
+     { $as_echo "$as_me:$LINENO: result: <<< Configuring library with Silo Fortran API >>>" >&5
+$as_echo "<<< Configuring library with Silo Fortran API >>>" >&6; }
+  fi
+
+      if (test x$enablesilo = xyes); then
+     SILO_INCLUDE="-I\$(top_srcdir)/contrib/silo"
+     SILO_LIBRARY="\$(EXTERNAL_LIBDIR)/libsilo\$(libext)"
+
+cat >>confdefs.h <<\_ACEOF
+#define HAVE_SILO 1
+_ACEOF
+
+     { $as_echo "$as_me:$LINENO: result: <<< Configuring library with Silo support >>>" >&5
+$as_echo "<<< Configuring library with Silo support >>>" >&6; }
+
+     if (test "x$enablehdf5" = "xyes"); then
+        libmesh_subpackage_arguments="$libmesh_subpackage_arguments --with-hdf5=${HDF5_PREFIX}/include,${HDF5_PREFIX}/lib --disable-silex"
+     fi
+
+     # allow opt-out for nested subpackages
+     if (test "x$enablenested" = "xyes"); then
+        subdirs="$subdirs contrib/silo"
+
+     fi
+
+  else
+     SILO_INCLUDE=""
+     SILO_LIBRARY=""
+     enablesilo=no
+     enablesilofortran=no
+  fi
+
+
+
+   if test x$enablesilofortran = xyes; then
+  SILO_FORTRAN_API_TRUE=
+  SILO_FORTRAN_API_FALSE='#'
+else
+  SILO_FORTRAN_API_TRUE='#'
+  SILO_FORTRAN_API_FALSE=
+fi
+
+
+if (test x$enablesilo = xyes); then
+  libmesh_contrib_INCLUDES="$SILO_INCLUDE $libmesh_contrib_INCLUDES"
+fi
+ if test x$enablesilo = xyes; then
+  LIBMESH_ENABLE_SILO_TRUE=
+  LIBMESH_ENABLE_SILO_FALSE='#'
+else
+  LIBMESH_ENABLE_SILO_TRUE='#'
+  LIBMESH_ENABLE_SILO_FALSE=
+fi
 
 
 # -------------------------------------------------------------
@@ -45028,20 +45022,6 @@ $as_echo "$as_me: error: conditional \"LIBMESH_ENABLE_GMV\" was never defined.
 Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi
-if test -z "${SILO_FORTRAN_API_TRUE}" && test -z "${SILO_FORTRAN_API_FALSE}"; then
-  { { $as_echo "$as_me:$LINENO: error: conditional \"SILO_FORTRAN_API\" was never defined.
-Usually this means the macro was only invoked conditionally." >&5
-$as_echo "$as_me: error: conditional \"SILO_FORTRAN_API\" was never defined.
-Usually this means the macro was only invoked conditionally." >&2;}
-   { (exit 1); exit 1; }; }
-fi
-if test -z "${LIBMESH_ENABLE_SILO_TRUE}" && test -z "${LIBMESH_ENABLE_SILO_FALSE}"; then
-  { { $as_echo "$as_me:$LINENO: error: conditional \"LIBMESH_ENABLE_SILO\" was never defined.
-Usually this means the macro was only invoked conditionally." >&5
-$as_echo "$as_me: error: conditional \"LIBMESH_ENABLE_SILO\" was never defined.
-Usually this means the macro was only invoked conditionally." >&2;}
-   { (exit 1); exit 1; }; }
-fi
 if test -z "${LIBMESH_ENABLE_VTK_TRUE}" && test -z "${LIBMESH_ENABLE_VTK_FALSE}"; then
   { { $as_echo "$as_me:$LINENO: error: conditional \"LIBMESH_ENABLE_VTK\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
@@ -45144,6 +45124,20 @@ if test -z "${LIBMESH_ENABLE_NEMESIS_V522_TRUE}" && test -z "${LIBMESH_ENABLE_NE
   { { $as_echo "$as_me:$LINENO: error: conditional \"LIBMESH_ENABLE_NEMESIS_V522\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
 $as_echo "$as_me: error: conditional \"LIBMESH_ENABLE_NEMESIS_V522\" was never defined.
+Usually this means the macro was only invoked conditionally." >&2;}
+   { (exit 1); exit 1; }; }
+fi
+if test -z "${SILO_FORTRAN_API_TRUE}" && test -z "${SILO_FORTRAN_API_FALSE}"; then
+  { { $as_echo "$as_me:$LINENO: error: conditional \"SILO_FORTRAN_API\" was never defined.
+Usually this means the macro was only invoked conditionally." >&5
+$as_echo "$as_me: error: conditional \"SILO_FORTRAN_API\" was never defined.
+Usually this means the macro was only invoked conditionally." >&2;}
+   { (exit 1); exit 1; }; }
+fi
+if test -z "${LIBMESH_ENABLE_SILO_TRUE}" && test -z "${LIBMESH_ENABLE_SILO_FALSE}"; then
+  { { $as_echo "$as_me:$LINENO: error: conditional \"LIBMESH_ENABLE_SILO\" was never defined.
+Usually this means the macro was only invoked conditionally." >&5
+$as_echo "$as_me: error: conditional \"LIBMESH_ENABLE_SILO\" was never defined.
 Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi
@@ -46271,7 +46265,6 @@ do
     "contrib/tetgen/Makefile") CONFIG_FILES="$CONFIG_FILES contrib/tetgen/Makefile" ;;
     "contrib/triangle/Makefile") CONFIG_FILES="$CONFIG_FILES contrib/triangle/Makefile" ;;
     "contrib/gmv/Makefile") CONFIG_FILES="$CONFIG_FILES contrib/gmv/Makefile" ;;
-    "contrib/silo/Makefile") CONFIG_FILES="$CONFIG_FILES contrib/silo/Makefile" ;;
     "contrib/eigen/eigen/Makefile") CONFIG_FILES="$CONFIG_FILES contrib/eigen/eigen/Makefile" ;;
     "contrib/netcdf/v3/Makefile") CONFIG_FILES="$CONFIG_FILES contrib/netcdf/v3/Makefile" ;;
     "contrib/exodusii/v5.09/Makefile") CONFIG_FILES="$CONFIG_FILES contrib/exodusii/v5.09/Makefile" ;;
@@ -48735,6 +48728,12 @@ if (test "x$enableoptional" = "xyes"); then
   fi
   echo '  'pthreads......................... : $enablepthreads
   echo '  'sfcurves......................... : $enablesfc
+  echo '  'silo............................. : $enablesilo
+  if (test "x$enablehdf5" == "xyes"); then
+  echo '     'drivers....................... : PDB, HDF5
+  else
+  echo '     'drivers....................... : PDB
+  fi
   echo '  'slepc............................ : $enableslepc
   echo '  'tbb.............................. : $enabletbb
   echo '  'c++ threads...................... : $enablecppthreads
