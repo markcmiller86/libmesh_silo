@@ -203,7 +203,7 @@ endif
 
 if LIBMESH_ENABLE_SILO
   SUBDIRS    += silo
-  opt_libs   += silo/.la 
+  opt_libs   += silo/libopt.la 
   dbg_libs   += silo/libdbg.la 
   devel_libs += silo/libdevel.la 
   prof_libs  += silo/libprof.la 
