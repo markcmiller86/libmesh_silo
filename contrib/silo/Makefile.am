@@ -67,7 +67,6 @@
 #
 #   Kathleen Bonnell, Thu Mar 3 10:34:15 PST 2011 
 #   Handle MSVC9 windows project files. 
- 
 ACLOCAL_AMFLAGS = -I config
 
 nodist_noinst_HEADERS = config.h
