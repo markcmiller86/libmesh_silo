@@ -30518,15 +30518,8 @@ else
   CXX_LINK_NEEDED_FALSE=
 fi
 
-ac_config_files="$ac_config_files Makefile config/Makefile src/Makefile src/score/Makefile src/pdb/Makefile src/silo/Makefile src/silo/silo.h src/debug/Makefile src/netcdf/Makefile src/pdb_drv/Makefile src/pdbp_drv/Makefile src/hdf5_drv/Makefile src/taurus/Makefile src/unknown/Makefile src/filters/Makefile tests/Makefile tools/Makefile tools/browser/Makefile tools/python/Makefile tools/silex/Makefile tools/silock/Makefile"
+ac_config_files="$ac_config_files Makefile config/Makefile src/Makefile src/score/Makefile src/pdb/Makefile src/silo/Makefile src/silo/silo.h src/debug/Makefile src/netcdf/Makefile src/pdb_drv/Makefile src/pdbp_drv/Makefile src/hdf5_drv/Makefile src/taurus/Makefile src/unknown/Makefile src/filters/Makefile tests/Makefile tools/Makefile tools/browser/Makefile tools/python/Makefile tools/silex/Makefile tools/silock/Makefile src/libsilo.settings"
 
-if test -n "$HDF5_DRV"; then
-  ac_config_files="$ac_config_files src/libsiloh5.settings"
-
-else
-  ac_config_files="$ac_config_files src/libsilo.settings"
-
-fi
 CC_FULLPATH=""
 if test -n "$CC"; then
     CC_FULLPATH=`which $CC`
@@ -31832,7 +31825,6 @@ do
     "tools/python/Makefile") CONFIG_FILES="$CONFIG_FILES tools/python/Makefile" ;;
     "tools/silex/Makefile") CONFIG_FILES="$CONFIG_FILES tools/silex/Makefile" ;;
     "tools/silock/Makefile") CONFIG_FILES="$CONFIG_FILES tools/silock/Makefile" ;;
-    "src/libsiloh5.settings") CONFIG_FILES="$CONFIG_FILES src/libsiloh5.settings" ;;
     "src/libsilo.settings") CONFIG_FILES="$CONFIG_FILES src/libsilo.settings" ;;
 
   *) { { $as_echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
@@ -33796,8 +33788,4 @@ $as_echo "$as_me: WARNING: unrecognized options: $ac_unrecognized_opts" >&2;}
 fi
 
 echo;echo
-if test -n "$HDF5_DRV"; then
-  cat src/libsiloh5.settings | sed 's|\\n||' | sed 's|"||g'
-else
-  cat src/libsilo.settings | sed 's|\\n||' | sed 's|"||g'
-fi
+cat src/libsilo.settings | sed 's|\\n||' | sed 's|"||g'

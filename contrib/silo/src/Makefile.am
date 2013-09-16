@@ -81,33 +81,18 @@ DIST_SUBDIRS = . debug filters hdf5_drv netcdf \
 pdb pdb_drv pdbp_drv score silo taurus unknown
 MAKESETTINGS = make.settings
 
-if HDF5_DRV_NEEDED
-  SETTINGSFILE=libsiloh5.settings
-  lib_LTLIBRARIES = libsiloh5.la
-  libsiloh5_la_SOURCES = siloh5_version.c
-  libsiloh5_la_LIBADD = \
-   score/libsilo_score.la \
-   pdb/libsilo_pdb.la \
-   silo/libsilo_silo.la \
-   debug/libsilo_debug.la \
-   $(DRIVER_LIBS) \
-   unknown/libsilo_unknown.la \
-   filters/libsilo_filters.la 
-  libsiloh5_la_LDFLAGS = -avoid-version
-else
-  SETTINGSFILE=libsilo.settings
-  lib_LTLIBRARIES = libsilo.la
-  libsilo_la_SOURCES = silo_version.c
-  libsilo_la_LIBADD = \
-   score/libsilo_score.la \
-   pdb/libsilo_pdb.la \
-   silo/libsilo_silo.la \
-   debug/libsilo_debug.la \
-   $(DRIVER_LIBS) \
-   unknown/libsilo_unknown.la \
-   filters/libsilo_filters.la 
-  libsilo_la_LDFLAGS = -avoid-version
-endif
+SETTINGSFILE=libsilo.settings
+lib_LTLIBRARIES = libsilo.la
+libsilo_la_SOURCES = silo_version.c
+libsilo_la_LIBADD = \
+score/libsilo_score.la \
+pdb/libsilo_pdb.la \
+silo/libsilo_silo.la \
+debug/libsilo_debug.la \
+$(DRIVER_LIBS) \
+unknown/libsilo_unknown.la \
+filters/libsilo_filters.la 
+libsilo_la_LDFLAGS = -avoid-version
 
 BUILT_SOURCES = $(MAKESETTINGS)
 $(MAKESETTINGS): Makefile

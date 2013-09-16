@@ -1348,12 +1348,8 @@ AC_CONFIG_FILES([
             tools/browser/Makefile
             tools/python/Makefile
             tools/silex/Makefile
-            tools/silock/Makefile])
-if test -n "$HDF5_DRV"; then
-  AC_CONFIG_FILES([src/libsiloh5.settings])
-else
-  AC_CONFIG_FILES([src/libsilo.settings])
-fi
+            tools/silock/Makefile
+            src/libsilo.settings])
 CC_FULLPATH=""
 if test -n "$CC"; then
     CC_FULLPATH=`which $CC`
@@ -1374,8 +1370,4 @@ dnl ----------------------------------------------------------------------
 dnl Print out a summary of what we are going to build.
 dnl   
 echo;echo
-if test -n "$HDF5_DRV"; then
-  cat src/libsiloh5.settings | sed 's|\\n||' | sed 's|"||g'
-else
-  cat src/libsilo.settings | sed 's|\\n||' | sed 's|"||g'
-fi
+cat src/libsilo.settings | sed 's|\\n||' | sed 's|"||g'

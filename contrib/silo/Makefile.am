@@ -81,6 +81,8 @@ MAINTAINERCLEANFILES = Makefile.in\
 SUBDIRS = . src tools tests
 DIST_SUBDIRS = . config src tests tools
 
+libsilo.la: src/libsilo.la
+
 help: config/make.help
 	cat $(srcdir)/config/make.help
 

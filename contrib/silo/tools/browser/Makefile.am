@@ -77,10 +77,8 @@ if FPZIP_NEEDED
   # Dummy C++ source to cause C++ linking.
   nodist_EXTRA_browser_SOURCES = dummy.cxx
 endif
-  browser_LDADD = ../../src/libsiloh5.la
-else
-  browser_LDADD = ../../src/libsilo.la
 endif
+browser_LDADD = ../../src/libsilo.la
 browser_LDADD += $(READLINE_LIBS)
 info_TEXINFOS = browser.texi
 AM_MAKEINFOHTMLFLAGS = --no-split

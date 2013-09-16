@@ -112,11 +112,7 @@ AUTOM4TE = autom4te
 AUTOTEST = $(AUTOM4TE) --language=autotest
 TESTSUITE = $(srcdir)/testsuite
 
-if HDF5_DRV_NEEDED
-  LDADD = ../src/libsiloh5.la
-else
-  LDADD = ../src/libsilo.la
-endif
+LDADD = ../src/libsilo.la
 
 # paths look at install directories before sources
 AM_CPPFLAGS = \

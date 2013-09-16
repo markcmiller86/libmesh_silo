@@ -99,7 +99,7 @@ host_triplet = @host@
 @TAURUS_NEEDED_TRUE@am__append_10 = taurus/libsilo_taurus.la
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(srcdir)/libsilo.settings.in $(srcdir)/libsiloh5.settings.in
+	$(srcdir)/libsilo.settings.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/config/ax_check_compiler_flags.m4 \
 	$(top_srcdir)/config/ax_have_qt.m4 \
@@ -114,7 +114,7 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
-CONFIG_CLEAN_FILES = libsiloh5.settings libsilo.settings
+CONFIG_CLEAN_FILES = libsilo.settings
 CONFIG_CLEAN_VPATH_FILES =
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
@@ -139,36 +139,17 @@ am__base_list = \
   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
 am__installdirs = "$(DESTDIR)$(libdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
-@HDF5_DRV_NEEDED_FALSE@libsilo_la_DEPENDENCIES =  \
-@HDF5_DRV_NEEDED_FALSE@	score/libsilo_score.la \
-@HDF5_DRV_NEEDED_FALSE@	pdb/libsilo_pdb.la silo/libsilo_silo.la \
-@HDF5_DRV_NEEDED_FALSE@	debug/libsilo_debug.la $(DRIVER_LIBS) \
-@HDF5_DRV_NEEDED_FALSE@	unknown/libsilo_unknown.la \
-@HDF5_DRV_NEEDED_FALSE@	filters/libsilo_filters.la
-am__libsilo_la_SOURCES_DIST = silo_version.c
-@HDF5_DRV_NEEDED_FALSE@am_libsilo_la_OBJECTS = silo_version.lo
+libsilo_la_DEPENDENCIES = score/libsilo_score.la pdb/libsilo_pdb.la \
+	silo/libsilo_silo.la debug/libsilo_debug.la $(DRIVER_LIBS) \
+	unknown/libsilo_unknown.la filters/libsilo_filters.la
+am_libsilo_la_OBJECTS = silo_version.lo
 libsilo_la_OBJECTS = $(am_libsilo_la_OBJECTS)
 libsilo_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(libsilo_la_LDFLAGS) $(LDFLAGS) -o $@
-@HDF5_DRV_NEEDED_FALSE@am_libsilo_la_rpath = -rpath $(libdir)
-@HDF5_DRV_NEEDED_TRUE@libsiloh5_la_DEPENDENCIES =  \
-@HDF5_DRV_NEEDED_TRUE@	score/libsilo_score.la \
-@HDF5_DRV_NEEDED_TRUE@	pdb/libsilo_pdb.la silo/libsilo_silo.la \
-@HDF5_DRV_NEEDED_TRUE@	debug/libsilo_debug.la $(DRIVER_LIBS) \
-@HDF5_DRV_NEEDED_TRUE@	unknown/libsilo_unknown.la \
-@HDF5_DRV_NEEDED_TRUE@	filters/libsilo_filters.la
-am__libsiloh5_la_SOURCES_DIST = siloh5_version.c
-@HDF5_DRV_NEEDED_TRUE@am_libsiloh5_la_OBJECTS = siloh5_version.lo
-libsiloh5_la_OBJECTS = $(am_libsiloh5_la_OBJECTS)
-libsiloh5_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
-	$(libsiloh5_la_LDFLAGS) $(LDFLAGS) -o $@
-@HDF5_DRV_NEEDED_TRUE@am_libsiloh5_la_rpath = -rpath $(libdir)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
-depcomp = $(SHELL) $(top_srcdir)/config/depcomp
-am__depfiles_maybe = depfiles
-am__mv = mv -f
+depcomp =
+am__depfiles_maybe =
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
@@ -178,9 +159,8 @@ CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-SOURCES = $(libsilo_la_SOURCES) $(libsiloh5_la_SOURCES)
-DIST_SOURCES = $(am__libsilo_la_SOURCES_DIST) \
-	$(am__libsiloh5_la_SOURCES_DIST)
+SOURCES = $(libsilo_la_SOURCES)
+DIST_SOURCES = $(libsilo_la_SOURCES)
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	html-recursive info-recursive install-data-recursive \
 	install-dvi-recursive install-exec-recursive \
@@ -406,32 +386,19 @@ DIST_SUBDIRS = . debug filters hdf5_drv netcdf \
 pdb pdb_drv pdbp_drv score silo taurus unknown
 
 MAKESETTINGS = make.settings
-@HDF5_DRV_NEEDED_FALSE@SETTINGSFILE = libsilo.settings
-@HDF5_DRV_NEEDED_TRUE@SETTINGSFILE = libsiloh5.settings
-@HDF5_DRV_NEEDED_FALSE@lib_LTLIBRARIES = libsilo.la
-@HDF5_DRV_NEEDED_TRUE@lib_LTLIBRARIES = libsiloh5.la
-@HDF5_DRV_NEEDED_TRUE@libsiloh5_la_SOURCES = siloh5_version.c
-@HDF5_DRV_NEEDED_TRUE@libsiloh5_la_LIBADD = \
-@HDF5_DRV_NEEDED_TRUE@   score/libsilo_score.la \
-@HDF5_DRV_NEEDED_TRUE@   pdb/libsilo_pdb.la \
-@HDF5_DRV_NEEDED_TRUE@   silo/libsilo_silo.la \
-@HDF5_DRV_NEEDED_TRUE@   debug/libsilo_debug.la \
-@HDF5_DRV_NEEDED_TRUE@   $(DRIVER_LIBS) \
-@HDF5_DRV_NEEDED_TRUE@   unknown/libsilo_unknown.la \
-@HDF5_DRV_NEEDED_TRUE@   filters/libsilo_filters.la 
+SETTINGSFILE = libsilo.settings
+lib_LTLIBRARIES = libsilo.la
+libsilo_la_SOURCES = silo_version.c
+libsilo_la_LIBADD = \
+score/libsilo_score.la \
+pdb/libsilo_pdb.la \
+silo/libsilo_silo.la \
+debug/libsilo_debug.la \
+$(DRIVER_LIBS) \
+unknown/libsilo_unknown.la \
+filters/libsilo_filters.la 
 
-@HDF5_DRV_NEEDED_TRUE@libsiloh5_la_LDFLAGS = -avoid-version
-@HDF5_DRV_NEEDED_FALSE@libsilo_la_SOURCES = silo_version.c
-@HDF5_DRV_NEEDED_FALSE@libsilo_la_LIBADD = \
-@HDF5_DRV_NEEDED_FALSE@   score/libsilo_score.la \
-@HDF5_DRV_NEEDED_FALSE@   pdb/libsilo_pdb.la \
-@HDF5_DRV_NEEDED_FALSE@   silo/libsilo_silo.la \
-@HDF5_DRV_NEEDED_FALSE@   debug/libsilo_debug.la \
-@HDF5_DRV_NEEDED_FALSE@   $(DRIVER_LIBS) \
-@HDF5_DRV_NEEDED_FALSE@   unknown/libsilo_unknown.la \
-@HDF5_DRV_NEEDED_FALSE@   filters/libsilo_filters.la 
-
-@HDF5_DRV_NEEDED_FALSE@libsilo_la_LDFLAGS = -avoid-version
+libsilo_la_LDFLAGS = -avoid-version
 BUILT_SOURCES = $(MAKESETTINGS)
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
@@ -447,9 +414,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign --ignore-deps src/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign src/Makefile
+	  $(AUTOMAKE) --foreign --ignore-deps src/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -468,8 +435,6 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
-libsiloh5.settings: $(top_builddir)/config.status $(srcdir)/libsiloh5.settings.in
-	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 libsilo.settings: $(top_builddir)/config.status $(srcdir)/libsilo.settings.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 install-libLTLIBRARIES: $(lib_LTLIBRARIES)
@@ -504,9 +469,7 @@ clean-libLTLIBRARIES:
 	  rm -f "$${dir}/so_locations"; \
 	done
 libsilo.la: $(libsilo_la_OBJECTS) $(libsilo_la_DEPENDENCIES) 
-	$(libsilo_la_LINK) $(am_libsilo_la_rpath) $(libsilo_la_OBJECTS) $(libsilo_la_LIBADD) $(LIBS)
-libsiloh5.la: $(libsiloh5_la_OBJECTS) $(libsiloh5_la_DEPENDENCIES) 
-	$(libsiloh5_la_LINK) $(am_libsiloh5_la_rpath) $(libsiloh5_la_OBJECTS) $(libsiloh5_la_LIBADD) $(LIBS)
+	$(libsilo_la_LINK) -rpath $(libdir) $(libsilo_la_OBJECTS) $(libsilo_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -514,29 +477,14 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/silo_version.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/siloh5_version.Plo@am__quote@
-
 .c.o:
-@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(COMPILE) -c $<
+	$(COMPILE) -c $<
 
 .c.obj:
-@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+	$(COMPILE) -c `$(CYGPATH_W) '$<'`
 
 .c.lo:
-@am__fastdepCC_TRUE@	$(LTCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ $<
+	$(LTCOMPILE) -c -o $@ $<
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -779,7 +727,6 @@ clean-am: clean-generic clean-libLTLIBRARIES clean-libtool clean-local \
 	mostlyclean-am
 
 distclean: distclean-recursive
-	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -825,7 +772,6 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-recursive
-	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

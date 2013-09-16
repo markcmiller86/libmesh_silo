@@ -69,22 +69,6 @@
 #
 ##############################################################################
 
-#
-# Modifications:
-#
-#   Mark C. Miller, Tue Aug  3 17:23:07 PDT 2010
-#   Added logic to error out of there already exists a bsd dir into which we
-#   wish to create a bsd tree. Added logic to remove the dir after completion.
-#
-#   Mark C. Miller, Wed Aug  4 15:52:52 PDT 2010
-#   Added logic to handle windows project files for BSD release.
-#
-#   Mark C. Miller, Mon Aug  9 16:58:46 PDT 2010
-#   Added creation of smalltest dist for bsd distributions.
-#
-#   Kathleen Bonnell, Thu Mar 3 10:34:15 PST 2011 
-#   Handle MSVC9 windows project files. 
-
 VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
@@ -126,6 +110,8 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
+depcomp =
+am__depfiles_maybe =
 SOURCES =
 DIST_SOURCES =
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
@@ -353,6 +339,22 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
+
+#
+# Modifications:
+#
+#   Mark C. Miller, Tue Aug  3 17:23:07 PDT 2010
+#   Added logic to error out of there already exists a bsd dir into which we
+#   wish to create a bsd tree. Added logic to remove the dir after completion.
+#
+#   Mark C. Miller, Wed Aug  4 15:52:52 PDT 2010
+#   Added logic to handle windows project files for BSD release.
+#
+#   Mark C. Miller, Mon Aug  9 16:58:46 PDT 2010
+#   Added creation of smalltest dist for bsd distributions.
+#
+#   Kathleen Bonnell, Thu Mar 3 10:34:15 PST 2011 
+#   Handle MSVC9 windows project files. 
 ACLOCAL_AMFLAGS = -I config
 nodist_noinst_HEADERS = config.h
 EXTRA_DIST = COPYRIGHT FAQ VERSION BSD_LICENSE_README
@@ -372,15 +374,15 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
-	      echo ' cd $(srcdir) && $(AUTOMAKE) --foreign'; \
-	      $(am__cd) $(srcdir) && $(AUTOMAKE) --foreign \
+	      echo ' cd $(srcdir) && $(AUTOMAKE) --foreign --ignore-deps'; \
+	      $(am__cd) $(srcdir) && $(AUTOMAKE) --foreign --ignore-deps \
 		&& exit 0; \
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign --ignore-deps Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign Makefile
+	  $(AUTOMAKE) --foreign --ignore-deps Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -857,6 +859,8 @@ uninstall-am:
 	mostlyclean mostlyclean-generic mostlyclean-libtool pdf pdf-am \
 	ps ps-am tags tags-recursive uninstall uninstall-am
 
+
+libsilo.la: src/libsilo.la
 
 help: config/make.help
 	cat $(srcdir)/config/make.help
