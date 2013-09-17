@@ -44,12 +44,12 @@ namespace {
 SiloIO::SiloIO (MeshBase& mesh) :
   MeshInput<MeshBase> (mesh, /*is_parallel_format=*/true),
   MeshOutput<MeshBase> (mesh, /*is_parallel_format=*/true),
-  ParallelObject (mesh),
+  ParallelObject (mesh)
 {
 }
 
 
-#if defined(LIBMESH_HAVE_EXODUS_API) && defined(LIBMESH_HAVE_SILO_API)
+#if defined(LIBMESH_HAVE_SILO_API)
 void SiloIO::read (const std::string& base_filename)
 {
   START_LOG ("read()","SiloIO");
@@ -75,37 +75,44 @@ void SiloIO::read (const std::string& base_filename)
 
 void SiloIO::read (const std::string& )
 {
-  libMesh::err <<  "ERROR, Nemesis API is not defined!" << std::endl;
+  libMesh::err <<  "ERROR, Silo API is not defined!" << std::endl;
   libmesh_error();
 }
 
-#endif // #if defined(LIBMESH_HAVE_EXODUS_API) && defined(LIBMESH_HAVE_SILO_API)
+#endif // #if defined(LIBMESH_HAVE_SILO_API)
 
 
+#if defined(LIBMESH_HAVE_SILO_API)
 
-
-
-#if defined(LIBMESH_HAVE_EXODUS_API) && defined(LIBMESH_HAVE_SILO_API)
-
-void Nemesis_IO::write (const std::string& base_filename)
+void SiloIO::write (const std::string& base_filename)
 {
   // Get a constant reference to the mesh for writing
   const MeshBase & mesh = MeshOutput<MeshBase>::mesh();
 
-  // Create the filename for this processor given the base_filename passed in.
-  std::string nemesis_filename = nemhelper->construct_nemesis_filename(base_filename);
+}
+
+void SiloIO::write_nodal_data (const std::string&,
+                               const std::vector<Number>&,
+                               const std::vector<std::string>&)
+{
 
 }
 
 #else
 
-void Nemesis_IO::write (const std::string& )
+void SiloIO::write (const std::string& )
 {
-  libMesh::err <<  "ERROR, Nemesis API is not defined!" << std::endl;
+  libMesh::err <<  "ERROR, Silo API is not defined!" << std::endl;
+  libmesh_error();
+}
+void SiloIO::write_nodal_data (const std::string&,
+                               const std::vector<Number>&,
+                               const std::vector<std::string>&)
+{
+  libMesh::err <<  "ERROR, Silo API is not defined!" << std::endl;
   libmesh_error();
 }
 
-#endif // #if defined(LIBMESH_HAVE_EXODUS_API) && defined(LIBMESH_HAVE_SILO_API)
-
+#endif // #if defined(LIBMESH_HAVE_SILO_API)
 
 } // namespace libMesh

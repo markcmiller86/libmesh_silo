@@ -275,11 +275,11 @@ am__libmesh_dbg_la_SOURCES_DIST = src/base/dof_map.C \
 	src/mesh/parallel_mesh.C src/mesh/parallel_mesh_iterators.C \
 	src/mesh/patch.C src/mesh/postscript_io.C \
 	src/mesh/serial_mesh.C src/mesh/serial_mesh_iterators.C \
-	src/mesh/tecplot_io.C src/mesh/tetgen_io.C src/mesh/ucd_io.C \
-	src/mesh/unstructured_mesh.C src/mesh/unv_io.C \
-	src/mesh/vtk_io.C src/mesh/xdr_head.C src/mesh/xdr_io.C \
-	src/mesh/xdr_mesh.C src/mesh/xdr_mgf.C src/mesh/xdr_soln.C \
-	src/numerics/analytic_function.C \
+	src/mesh/silo_io.C src/mesh/tecplot_io.C src/mesh/tetgen_io.C \
+	src/mesh/ucd_io.C src/mesh/unstructured_mesh.C \
+	src/mesh/unv_io.C src/mesh/vtk_io.C src/mesh/xdr_head.C \
+	src/mesh/xdr_io.C src/mesh/xdr_mesh.C src/mesh/xdr_mgf.C \
+	src/mesh/xdr_soln.C src/numerics/analytic_function.C \
 	src/numerics/coupling_matrix.C src/numerics/dense_matrix.C \
 	src/numerics/dense_matrix_base.C \
 	src/numerics/dense_matrix_blas_lapack.C \
@@ -632,6 +632,7 @@ am__objects_1 = src/base/libmesh_dbg_la-dof_map.lo \
 	src/mesh/libmesh_dbg_la-postscript_io.lo \
 	src/mesh/libmesh_dbg_la-serial_mesh.lo \
 	src/mesh/libmesh_dbg_la-serial_mesh_iterators.lo \
+	src/mesh/libmesh_dbg_la-silo_io.lo \
 	src/mesh/libmesh_dbg_la-tecplot_io.lo \
 	src/mesh/libmesh_dbg_la-tetgen_io.lo \
 	src/mesh/libmesh_dbg_la-ucd_io.lo \
@@ -956,11 +957,11 @@ am__libmesh_devel_la_SOURCES_DIST = src/base/dof_map.C \
 	src/mesh/parallel_mesh.C src/mesh/parallel_mesh_iterators.C \
 	src/mesh/patch.C src/mesh/postscript_io.C \
 	src/mesh/serial_mesh.C src/mesh/serial_mesh_iterators.C \
-	src/mesh/tecplot_io.C src/mesh/tetgen_io.C src/mesh/ucd_io.C \
-	src/mesh/unstructured_mesh.C src/mesh/unv_io.C \
-	src/mesh/vtk_io.C src/mesh/xdr_head.C src/mesh/xdr_io.C \
-	src/mesh/xdr_mesh.C src/mesh/xdr_mgf.C src/mesh/xdr_soln.C \
-	src/numerics/analytic_function.C \
+	src/mesh/silo_io.C src/mesh/tecplot_io.C src/mesh/tetgen_io.C \
+	src/mesh/ucd_io.C src/mesh/unstructured_mesh.C \
+	src/mesh/unv_io.C src/mesh/vtk_io.C src/mesh/xdr_head.C \
+	src/mesh/xdr_io.C src/mesh/xdr_mesh.C src/mesh/xdr_mgf.C \
+	src/mesh/xdr_soln.C src/numerics/analytic_function.C \
 	src/numerics/coupling_matrix.C src/numerics/dense_matrix.C \
 	src/numerics/dense_matrix_base.C \
 	src/numerics/dense_matrix_blas_lapack.C \
@@ -1312,6 +1313,7 @@ am__objects_2 = src/base/libmesh_devel_la-dof_map.lo \
 	src/mesh/libmesh_devel_la-postscript_io.lo \
 	src/mesh/libmesh_devel_la-serial_mesh.lo \
 	src/mesh/libmesh_devel_la-serial_mesh_iterators.lo \
+	src/mesh/libmesh_devel_la-silo_io.lo \
 	src/mesh/libmesh_devel_la-tecplot_io.lo \
 	src/mesh/libmesh_devel_la-tetgen_io.lo \
 	src/mesh/libmesh_devel_la-ucd_io.lo \
@@ -1634,11 +1636,11 @@ am__libmesh_oprof_la_SOURCES_DIST = src/base/dof_map.C \
 	src/mesh/parallel_mesh.C src/mesh/parallel_mesh_iterators.C \
 	src/mesh/patch.C src/mesh/postscript_io.C \
 	src/mesh/serial_mesh.C src/mesh/serial_mesh_iterators.C \
-	src/mesh/tecplot_io.C src/mesh/tetgen_io.C src/mesh/ucd_io.C \
-	src/mesh/unstructured_mesh.C src/mesh/unv_io.C \
-	src/mesh/vtk_io.C src/mesh/xdr_head.C src/mesh/xdr_io.C \
-	src/mesh/xdr_mesh.C src/mesh/xdr_mgf.C src/mesh/xdr_soln.C \
-	src/numerics/analytic_function.C \
+	src/mesh/silo_io.C src/mesh/tecplot_io.C src/mesh/tetgen_io.C \
+	src/mesh/ucd_io.C src/mesh/unstructured_mesh.C \
+	src/mesh/unv_io.C src/mesh/vtk_io.C src/mesh/xdr_head.C \
+	src/mesh/xdr_io.C src/mesh/xdr_mesh.C src/mesh/xdr_mgf.C \
+	src/mesh/xdr_soln.C src/numerics/analytic_function.C \
 	src/numerics/coupling_matrix.C src/numerics/dense_matrix.C \
 	src/numerics/dense_matrix_base.C \
 	src/numerics/dense_matrix_blas_lapack.C \
@@ -1990,6 +1992,7 @@ am__objects_3 = src/base/libmesh_oprof_la-dof_map.lo \
 	src/mesh/libmesh_oprof_la-postscript_io.lo \
 	src/mesh/libmesh_oprof_la-serial_mesh.lo \
 	src/mesh/libmesh_oprof_la-serial_mesh_iterators.lo \
+	src/mesh/libmesh_oprof_la-silo_io.lo \
 	src/mesh/libmesh_oprof_la-tecplot_io.lo \
 	src/mesh/libmesh_oprof_la-tetgen_io.lo \
 	src/mesh/libmesh_oprof_la-ucd_io.lo \
@@ -2312,11 +2315,11 @@ am__libmesh_opt_la_SOURCES_DIST = src/base/dof_map.C \
 	src/mesh/parallel_mesh.C src/mesh/parallel_mesh_iterators.C \
 	src/mesh/patch.C src/mesh/postscript_io.C \
 	src/mesh/serial_mesh.C src/mesh/serial_mesh_iterators.C \
-	src/mesh/tecplot_io.C src/mesh/tetgen_io.C src/mesh/ucd_io.C \
-	src/mesh/unstructured_mesh.C src/mesh/unv_io.C \
-	src/mesh/vtk_io.C src/mesh/xdr_head.C src/mesh/xdr_io.C \
-	src/mesh/xdr_mesh.C src/mesh/xdr_mgf.C src/mesh/xdr_soln.C \
-	src/numerics/analytic_function.C \
+	src/mesh/silo_io.C src/mesh/tecplot_io.C src/mesh/tetgen_io.C \
+	src/mesh/ucd_io.C src/mesh/unstructured_mesh.C \
+	src/mesh/unv_io.C src/mesh/vtk_io.C src/mesh/xdr_head.C \
+	src/mesh/xdr_io.C src/mesh/xdr_mesh.C src/mesh/xdr_mgf.C \
+	src/mesh/xdr_soln.C src/numerics/analytic_function.C \
 	src/numerics/coupling_matrix.C src/numerics/dense_matrix.C \
 	src/numerics/dense_matrix_base.C \
 	src/numerics/dense_matrix_blas_lapack.C \
@@ -2668,6 +2671,7 @@ am__objects_4 = src/base/libmesh_opt_la-dof_map.lo \
 	src/mesh/libmesh_opt_la-postscript_io.lo \
 	src/mesh/libmesh_opt_la-serial_mesh.lo \
 	src/mesh/libmesh_opt_la-serial_mesh_iterators.lo \
+	src/mesh/libmesh_opt_la-silo_io.lo \
 	src/mesh/libmesh_opt_la-tecplot_io.lo \
 	src/mesh/libmesh_opt_la-tetgen_io.lo \
 	src/mesh/libmesh_opt_la-ucd_io.lo \
@@ -2989,11 +2993,11 @@ am__libmesh_prof_la_SOURCES_DIST = src/base/dof_map.C \
 	src/mesh/parallel_mesh.C src/mesh/parallel_mesh_iterators.C \
 	src/mesh/patch.C src/mesh/postscript_io.C \
 	src/mesh/serial_mesh.C src/mesh/serial_mesh_iterators.C \
-	src/mesh/tecplot_io.C src/mesh/tetgen_io.C src/mesh/ucd_io.C \
-	src/mesh/unstructured_mesh.C src/mesh/unv_io.C \
-	src/mesh/vtk_io.C src/mesh/xdr_head.C src/mesh/xdr_io.C \
-	src/mesh/xdr_mesh.C src/mesh/xdr_mgf.C src/mesh/xdr_soln.C \
-	src/numerics/analytic_function.C \
+	src/mesh/silo_io.C src/mesh/tecplot_io.C src/mesh/tetgen_io.C \
+	src/mesh/ucd_io.C src/mesh/unstructured_mesh.C \
+	src/mesh/unv_io.C src/mesh/vtk_io.C src/mesh/xdr_head.C \
+	src/mesh/xdr_io.C src/mesh/xdr_mesh.C src/mesh/xdr_mgf.C \
+	src/mesh/xdr_soln.C src/numerics/analytic_function.C \
 	src/numerics/coupling_matrix.C src/numerics/dense_matrix.C \
 	src/numerics/dense_matrix_base.C \
 	src/numerics/dense_matrix_blas_lapack.C \
@@ -3345,6 +3349,7 @@ am__objects_5 = src/base/libmesh_prof_la-dof_map.lo \
 	src/mesh/libmesh_prof_la-postscript_io.lo \
 	src/mesh/libmesh_prof_la-serial_mesh.lo \
 	src/mesh/libmesh_prof_la-serial_mesh_iterators.lo \
+	src/mesh/libmesh_prof_la-silo_io.lo \
 	src/mesh/libmesh_prof_la-tecplot_io.lo \
 	src/mesh/libmesh_prof_la-tetgen_io.lo \
 	src/mesh/libmesh_prof_la-ucd_io.lo \
@@ -4511,6 +4516,7 @@ libmesh_SOURCES = \
         src/mesh/postscript_io.C \
         src/mesh/serial_mesh.C \
         src/mesh/serial_mesh_iterators.C \
+        src/mesh/silo_io.C \
         src/mesh/tecplot_io.C \
         src/mesh/tetgen_io.C \
         src/mesh/ucd_io.C \
@@ -5459,6 +5465,8 @@ src/mesh/libmesh_dbg_la-serial_mesh.lo: src/mesh/$(am__dirstamp) \
 	src/mesh/$(DEPDIR)/$(am__dirstamp)
 src/mesh/libmesh_dbg_la-serial_mesh_iterators.lo:  \
 	src/mesh/$(am__dirstamp) src/mesh/$(DEPDIR)/$(am__dirstamp)
+src/mesh/libmesh_dbg_la-silo_io.lo: src/mesh/$(am__dirstamp) \
+	src/mesh/$(DEPDIR)/$(am__dirstamp)
 src/mesh/libmesh_dbg_la-tecplot_io.lo: src/mesh/$(am__dirstamp) \
 	src/mesh/$(DEPDIR)/$(am__dirstamp)
 src/mesh/libmesh_dbg_la-tetgen_io.lo: src/mesh/$(am__dirstamp) \
@@ -6493,6 +6501,8 @@ src/mesh/libmesh_devel_la-serial_mesh.lo: src/mesh/$(am__dirstamp) \
 	src/mesh/$(DEPDIR)/$(am__dirstamp)
 src/mesh/libmesh_devel_la-serial_mesh_iterators.lo:  \
 	src/mesh/$(am__dirstamp) src/mesh/$(DEPDIR)/$(am__dirstamp)
+src/mesh/libmesh_devel_la-silo_io.lo: src/mesh/$(am__dirstamp) \
+	src/mesh/$(DEPDIR)/$(am__dirstamp)
 src/mesh/libmesh_devel_la-tecplot_io.lo: src/mesh/$(am__dirstamp) \
 	src/mesh/$(DEPDIR)/$(am__dirstamp)
 src/mesh/libmesh_devel_la-tetgen_io.lo: src/mesh/$(am__dirstamp) \
@@ -7470,6 +7480,8 @@ src/mesh/libmesh_oprof_la-serial_mesh.lo: src/mesh/$(am__dirstamp) \
 	src/mesh/$(DEPDIR)/$(am__dirstamp)
 src/mesh/libmesh_oprof_la-serial_mesh_iterators.lo:  \
 	src/mesh/$(am__dirstamp) src/mesh/$(DEPDIR)/$(am__dirstamp)
+src/mesh/libmesh_oprof_la-silo_io.lo: src/mesh/$(am__dirstamp) \
+	src/mesh/$(DEPDIR)/$(am__dirstamp)
 src/mesh/libmesh_oprof_la-tecplot_io.lo: src/mesh/$(am__dirstamp) \
 	src/mesh/$(DEPDIR)/$(am__dirstamp)
 src/mesh/libmesh_oprof_la-tetgen_io.lo: src/mesh/$(am__dirstamp) \
@@ -8447,6 +8459,8 @@ src/mesh/libmesh_opt_la-serial_mesh.lo: src/mesh/$(am__dirstamp) \
 	src/mesh/$(DEPDIR)/$(am__dirstamp)
 src/mesh/libmesh_opt_la-serial_mesh_iterators.lo:  \
 	src/mesh/$(am__dirstamp) src/mesh/$(DEPDIR)/$(am__dirstamp)
+src/mesh/libmesh_opt_la-silo_io.lo: src/mesh/$(am__dirstamp) \
+	src/mesh/$(DEPDIR)/$(am__dirstamp)
 src/mesh/libmesh_opt_la-tecplot_io.lo: src/mesh/$(am__dirstamp) \
 	src/mesh/$(DEPDIR)/$(am__dirstamp)
 src/mesh/libmesh_opt_la-tetgen_io.lo: src/mesh/$(am__dirstamp) \
@@ -9421,6 +9435,8 @@ src/mesh/libmesh_prof_la-serial_mesh.lo: src/mesh/$(am__dirstamp) \
 	src/mesh/$(DEPDIR)/$(am__dirstamp)
 src/mesh/libmesh_prof_la-serial_mesh_iterators.lo:  \
 	src/mesh/$(am__dirstamp) src/mesh/$(DEPDIR)/$(am__dirstamp)
+src/mesh/libmesh_prof_la-silo_io.lo: src/mesh/$(am__dirstamp) \
+	src/mesh/$(DEPDIR)/$(am__dirstamp)
 src/mesh/libmesh_prof_la-tecplot_io.lo: src/mesh/$(am__dirstamp) \
 	src/mesh/$(DEPDIR)/$(am__dirstamp)
 src/mesh/libmesh_prof_la-tetgen_io.lo: src/mesh/$(am__dirstamp) \
@@ -12011,6 +12027,8 @@ mostlyclean-compile:
 	-rm -f src/mesh/libmesh_dbg_la-serial_mesh.lo
 	-rm -f src/mesh/libmesh_dbg_la-serial_mesh_iterators.$(OBJEXT)
 	-rm -f src/mesh/libmesh_dbg_la-serial_mesh_iterators.lo
+	-rm -f src/mesh/libmesh_dbg_la-silo_io.$(OBJEXT)
+	-rm -f src/mesh/libmesh_dbg_la-silo_io.lo
 	-rm -f src/mesh/libmesh_dbg_la-tecplot_io.$(OBJEXT)
 	-rm -f src/mesh/libmesh_dbg_la-tecplot_io.lo
 	-rm -f src/mesh/libmesh_dbg_la-tetgen_io.$(OBJEXT)
@@ -12129,6 +12147,8 @@ mostlyclean-compile:
 	-rm -f src/mesh/libmesh_devel_la-serial_mesh.lo
 	-rm -f src/mesh/libmesh_devel_la-serial_mesh_iterators.$(OBJEXT)
 	-rm -f src/mesh/libmesh_devel_la-serial_mesh_iterators.lo
+	-rm -f src/mesh/libmesh_devel_la-silo_io.$(OBJEXT)
+	-rm -f src/mesh/libmesh_devel_la-silo_io.lo
 	-rm -f src/mesh/libmesh_devel_la-tecplot_io.$(OBJEXT)
 	-rm -f src/mesh/libmesh_devel_la-tecplot_io.lo
 	-rm -f src/mesh/libmesh_devel_la-tetgen_io.$(OBJEXT)
@@ -12247,6 +12267,8 @@ mostlyclean-compile:
 	-rm -f src/mesh/libmesh_oprof_la-serial_mesh.lo
 	-rm -f src/mesh/libmesh_oprof_la-serial_mesh_iterators.$(OBJEXT)
 	-rm -f src/mesh/libmesh_oprof_la-serial_mesh_iterators.lo
+	-rm -f src/mesh/libmesh_oprof_la-silo_io.$(OBJEXT)
+	-rm -f src/mesh/libmesh_oprof_la-silo_io.lo
 	-rm -f src/mesh/libmesh_oprof_la-tecplot_io.$(OBJEXT)
 	-rm -f src/mesh/libmesh_oprof_la-tecplot_io.lo
 	-rm -f src/mesh/libmesh_oprof_la-tetgen_io.$(OBJEXT)
@@ -12365,6 +12387,8 @@ mostlyclean-compile:
 	-rm -f src/mesh/libmesh_opt_la-serial_mesh.lo
 	-rm -f src/mesh/libmesh_opt_la-serial_mesh_iterators.$(OBJEXT)
 	-rm -f src/mesh/libmesh_opt_la-serial_mesh_iterators.lo
+	-rm -f src/mesh/libmesh_opt_la-silo_io.$(OBJEXT)
+	-rm -f src/mesh/libmesh_opt_la-silo_io.lo
 	-rm -f src/mesh/libmesh_opt_la-tecplot_io.$(OBJEXT)
 	-rm -f src/mesh/libmesh_opt_la-tecplot_io.lo
 	-rm -f src/mesh/libmesh_opt_la-tetgen_io.$(OBJEXT)
@@ -12483,6 +12507,8 @@ mostlyclean-compile:
 	-rm -f src/mesh/libmesh_prof_la-serial_mesh.lo
 	-rm -f src/mesh/libmesh_prof_la-serial_mesh_iterators.$(OBJEXT)
 	-rm -f src/mesh/libmesh_prof_la-serial_mesh_iterators.lo
+	-rm -f src/mesh/libmesh_prof_la-silo_io.$(OBJEXT)
+	-rm -f src/mesh/libmesh_prof_la-silo_io.lo
 	-rm -f src/mesh/libmesh_prof_la-tecplot_io.$(OBJEXT)
 	-rm -f src/mesh/libmesh_prof_la-tecplot_io.lo
 	-rm -f src/mesh/libmesh_prof_la-tetgen_io.$(OBJEXT)
@@ -15197,6 +15223,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_dbg_la-postscript_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_dbg_la-serial_mesh.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_dbg_la-serial_mesh_iterators.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_dbg_la-silo_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_dbg_la-tecplot_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_dbg_la-tetgen_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_dbg_la-ucd_io.Plo@am__quote@
@@ -15256,6 +15283,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_devel_la-postscript_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_devel_la-serial_mesh.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_devel_la-serial_mesh_iterators.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_devel_la-silo_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_devel_la-tecplot_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_devel_la-tetgen_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_devel_la-ucd_io.Plo@am__quote@
@@ -15315,6 +15343,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_oprof_la-postscript_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_oprof_la-serial_mesh.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_oprof_la-serial_mesh_iterators.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_oprof_la-silo_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_oprof_la-tecplot_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_oprof_la-tetgen_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_oprof_la-ucd_io.Plo@am__quote@
@@ -15374,6 +15403,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_opt_la-postscript_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_opt_la-serial_mesh.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_opt_la-serial_mesh_iterators.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_opt_la-silo_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_opt_la-tecplot_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_opt_la-tetgen_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_opt_la-ucd_io.Plo@am__quote@
@@ -15433,6 +15463,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_prof_la-postscript_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_prof_la-serial_mesh.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_prof_la-serial_mesh_iterators.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_prof_la-silo_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_prof_la-tecplot_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_prof_la-tetgen_io.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/mesh/$(DEPDIR)/libmesh_prof_la-ucd_io.Plo@am__quote@
@@ -18043,6 +18074,14 @@ src/mesh/libmesh_dbg_la-serial_mesh_iterators.lo: src/mesh/serial_mesh_iterators
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/mesh/serial_mesh_iterators.C' object='src/mesh/libmesh_dbg_la-serial_mesh_iterators.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_dbg_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_dbg_la_CXXFLAGS) $(CXXFLAGS) -c -o src/mesh/libmesh_dbg_la-serial_mesh_iterators.lo `test -f 'src/mesh/serial_mesh_iterators.C' || echo '$(srcdir)/'`src/mesh/serial_mesh_iterators.C
+
+src/mesh/libmesh_dbg_la-silo_io.lo: src/mesh/silo_io.C
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_dbg_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_dbg_la_CXXFLAGS) $(CXXFLAGS) -MT src/mesh/libmesh_dbg_la-silo_io.lo -MD -MP -MF src/mesh/$(DEPDIR)/libmesh_dbg_la-silo_io.Tpo -c -o src/mesh/libmesh_dbg_la-silo_io.lo `test -f 'src/mesh/silo_io.C' || echo '$(srcdir)/'`src/mesh/silo_io.C
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/mesh/$(DEPDIR)/libmesh_dbg_la-silo_io.Tpo src/mesh/$(DEPDIR)/libmesh_dbg_la-silo_io.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/mesh/silo_io.C' object='src/mesh/libmesh_dbg_la-silo_io.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_dbg_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_dbg_la_CXXFLAGS) $(CXXFLAGS) -c -o src/mesh/libmesh_dbg_la-silo_io.lo `test -f 'src/mesh/silo_io.C' || echo '$(srcdir)/'`src/mesh/silo_io.C
 
 src/mesh/libmesh_dbg_la-tecplot_io.lo: src/mesh/tecplot_io.C
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_dbg_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_dbg_la_CXXFLAGS) $(CXXFLAGS) -MT src/mesh/libmesh_dbg_la-tecplot_io.lo -MD -MP -MF src/mesh/$(DEPDIR)/libmesh_dbg_la-tecplot_io.Tpo -c -o src/mesh/libmesh_dbg_la-tecplot_io.lo `test -f 'src/mesh/tecplot_io.C' || echo '$(srcdir)/'`src/mesh/tecplot_io.C
@@ -21244,6 +21283,14 @@ src/mesh/libmesh_devel_la-serial_mesh_iterators.lo: src/mesh/serial_mesh_iterato
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_devel_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_devel_la_CXXFLAGS) $(CXXFLAGS) -c -o src/mesh/libmesh_devel_la-serial_mesh_iterators.lo `test -f 'src/mesh/serial_mesh_iterators.C' || echo '$(srcdir)/'`src/mesh/serial_mesh_iterators.C
 
+src/mesh/libmesh_devel_la-silo_io.lo: src/mesh/silo_io.C
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_devel_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_devel_la_CXXFLAGS) $(CXXFLAGS) -MT src/mesh/libmesh_devel_la-silo_io.lo -MD -MP -MF src/mesh/$(DEPDIR)/libmesh_devel_la-silo_io.Tpo -c -o src/mesh/libmesh_devel_la-silo_io.lo `test -f 'src/mesh/silo_io.C' || echo '$(srcdir)/'`src/mesh/silo_io.C
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/mesh/$(DEPDIR)/libmesh_devel_la-silo_io.Tpo src/mesh/$(DEPDIR)/libmesh_devel_la-silo_io.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/mesh/silo_io.C' object='src/mesh/libmesh_devel_la-silo_io.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_devel_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_devel_la_CXXFLAGS) $(CXXFLAGS) -c -o src/mesh/libmesh_devel_la-silo_io.lo `test -f 'src/mesh/silo_io.C' || echo '$(srcdir)/'`src/mesh/silo_io.C
+
 src/mesh/libmesh_devel_la-tecplot_io.lo: src/mesh/tecplot_io.C
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_devel_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_devel_la_CXXFLAGS) $(CXXFLAGS) -MT src/mesh/libmesh_devel_la-tecplot_io.lo -MD -MP -MF src/mesh/$(DEPDIR)/libmesh_devel_la-tecplot_io.Tpo -c -o src/mesh/libmesh_devel_la-tecplot_io.lo `test -f 'src/mesh/tecplot_io.C' || echo '$(srcdir)/'`src/mesh/tecplot_io.C
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/mesh/$(DEPDIR)/libmesh_devel_la-tecplot_io.Tpo src/mesh/$(DEPDIR)/libmesh_devel_la-tecplot_io.Plo
@@ -24443,6 +24490,14 @@ src/mesh/libmesh_oprof_la-serial_mesh_iterators.lo: src/mesh/serial_mesh_iterato
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/mesh/serial_mesh_iterators.C' object='src/mesh/libmesh_oprof_la-serial_mesh_iterators.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_oprof_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_oprof_la_CXXFLAGS) $(CXXFLAGS) -c -o src/mesh/libmesh_oprof_la-serial_mesh_iterators.lo `test -f 'src/mesh/serial_mesh_iterators.C' || echo '$(srcdir)/'`src/mesh/serial_mesh_iterators.C
+
+src/mesh/libmesh_oprof_la-silo_io.lo: src/mesh/silo_io.C
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_oprof_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_oprof_la_CXXFLAGS) $(CXXFLAGS) -MT src/mesh/libmesh_oprof_la-silo_io.lo -MD -MP -MF src/mesh/$(DEPDIR)/libmesh_oprof_la-silo_io.Tpo -c -o src/mesh/libmesh_oprof_la-silo_io.lo `test -f 'src/mesh/silo_io.C' || echo '$(srcdir)/'`src/mesh/silo_io.C
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/mesh/$(DEPDIR)/libmesh_oprof_la-silo_io.Tpo src/mesh/$(DEPDIR)/libmesh_oprof_la-silo_io.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/mesh/silo_io.C' object='src/mesh/libmesh_oprof_la-silo_io.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_oprof_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_oprof_la_CXXFLAGS) $(CXXFLAGS) -c -o src/mesh/libmesh_oprof_la-silo_io.lo `test -f 'src/mesh/silo_io.C' || echo '$(srcdir)/'`src/mesh/silo_io.C
 
 src/mesh/libmesh_oprof_la-tecplot_io.lo: src/mesh/tecplot_io.C
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_oprof_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_oprof_la_CXXFLAGS) $(CXXFLAGS) -MT src/mesh/libmesh_oprof_la-tecplot_io.lo -MD -MP -MF src/mesh/$(DEPDIR)/libmesh_oprof_la-tecplot_io.Tpo -c -o src/mesh/libmesh_oprof_la-tecplot_io.lo `test -f 'src/mesh/tecplot_io.C' || echo '$(srcdir)/'`src/mesh/tecplot_io.C
@@ -27644,6 +27699,14 @@ src/mesh/libmesh_opt_la-serial_mesh_iterators.lo: src/mesh/serial_mesh_iterators
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_opt_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_opt_la_CXXFLAGS) $(CXXFLAGS) -c -o src/mesh/libmesh_opt_la-serial_mesh_iterators.lo `test -f 'src/mesh/serial_mesh_iterators.C' || echo '$(srcdir)/'`src/mesh/serial_mesh_iterators.C
 
+src/mesh/libmesh_opt_la-silo_io.lo: src/mesh/silo_io.C
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_opt_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_opt_la_CXXFLAGS) $(CXXFLAGS) -MT src/mesh/libmesh_opt_la-silo_io.lo -MD -MP -MF src/mesh/$(DEPDIR)/libmesh_opt_la-silo_io.Tpo -c -o src/mesh/libmesh_opt_la-silo_io.lo `test -f 'src/mesh/silo_io.C' || echo '$(srcdir)/'`src/mesh/silo_io.C
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/mesh/$(DEPDIR)/libmesh_opt_la-silo_io.Tpo src/mesh/$(DEPDIR)/libmesh_opt_la-silo_io.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/mesh/silo_io.C' object='src/mesh/libmesh_opt_la-silo_io.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_opt_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_opt_la_CXXFLAGS) $(CXXFLAGS) -c -o src/mesh/libmesh_opt_la-silo_io.lo `test -f 'src/mesh/silo_io.C' || echo '$(srcdir)/'`src/mesh/silo_io.C
+
 src/mesh/libmesh_opt_la-tecplot_io.lo: src/mesh/tecplot_io.C
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_opt_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_opt_la_CXXFLAGS) $(CXXFLAGS) -MT src/mesh/libmesh_opt_la-tecplot_io.lo -MD -MP -MF src/mesh/$(DEPDIR)/libmesh_opt_la-tecplot_io.Tpo -c -o src/mesh/libmesh_opt_la-tecplot_io.lo `test -f 'src/mesh/tecplot_io.C' || echo '$(srcdir)/'`src/mesh/tecplot_io.C
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/mesh/$(DEPDIR)/libmesh_opt_la-tecplot_io.Tpo src/mesh/$(DEPDIR)/libmesh_opt_la-tecplot_io.Plo
@@ -30843,6 +30906,14 @@ src/mesh/libmesh_prof_la-serial_mesh_iterators.lo: src/mesh/serial_mesh_iterator
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/mesh/serial_mesh_iterators.C' object='src/mesh/libmesh_prof_la-serial_mesh_iterators.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_prof_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_prof_la_CXXFLAGS) $(CXXFLAGS) -c -o src/mesh/libmesh_prof_la-serial_mesh_iterators.lo `test -f 'src/mesh/serial_mesh_iterators.C' || echo '$(srcdir)/'`src/mesh/serial_mesh_iterators.C
+
+src/mesh/libmesh_prof_la-silo_io.lo: src/mesh/silo_io.C
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_prof_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_prof_la_CXXFLAGS) $(CXXFLAGS) -MT src/mesh/libmesh_prof_la-silo_io.lo -MD -MP -MF src/mesh/$(DEPDIR)/libmesh_prof_la-silo_io.Tpo -c -o src/mesh/libmesh_prof_la-silo_io.lo `test -f 'src/mesh/silo_io.C' || echo '$(srcdir)/'`src/mesh/silo_io.C
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/mesh/$(DEPDIR)/libmesh_prof_la-silo_io.Tpo src/mesh/$(DEPDIR)/libmesh_prof_la-silo_io.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/mesh/silo_io.C' object='src/mesh/libmesh_prof_la-silo_io.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_prof_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_prof_la_CXXFLAGS) $(CXXFLAGS) -c -o src/mesh/libmesh_prof_la-silo_io.lo `test -f 'src/mesh/silo_io.C' || echo '$(srcdir)/'`src/mesh/silo_io.C
 
 src/mesh/libmesh_prof_la-tecplot_io.lo: src/mesh/tecplot_io.C
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libmesh_prof_la_CPPFLAGS) $(CPPFLAGS) $(libmesh_prof_la_CXXFLAGS) $(CXXFLAGS) -MT src/mesh/libmesh_prof_la-tecplot_io.lo -MD -MP -MF src/mesh/$(DEPDIR)/libmesh_prof_la-tecplot_io.Tpo -c -o src/mesh/libmesh_prof_la-tecplot_io.lo `test -f 'src/mesh/tecplot_io.C' || echo '$(srcdir)/'`src/mesh/tecplot_io.C

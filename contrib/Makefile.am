@@ -212,11 +212,11 @@ if LIBMESH_ENABLE_SILO
 #  devel_libs += silo/libdevel.la 
 #  prof_libs  += silo/libprof.la 
 #  oprof_libs += silo/liboprof.la 
-  opt_libs   += silo/libsilo.la 
-  dbg_libs   += silo/libsilo.la 
-  devel_libs += silo/libsilo.la 
-  prof_libs  += silo/libsilo.la 
-  oprof_libs += silo/libsilo.la 
+  opt_libs   += silo/src/libsilo.la 
+  dbg_libs   += silo/src/libsilo.la 
+  devel_libs += silo/src/libsilo.la 
+  prof_libs  += silo/src/libsilo.la 
+  oprof_libs += silo/src/libsilo.la 
 endif
 
 ######################################################################

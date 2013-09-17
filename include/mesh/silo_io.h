@@ -45,7 +45,9 @@ class MeshBase;
 // ------------------------------------------------------------
 // SiloIO class definition
 class SiloIO : public MeshInput<MeshBase>,
-	      public MeshOutput<MeshBase>
+	       public MeshOutput<MeshBase>,
+               public ParallelObject
+
 {
  public:
 

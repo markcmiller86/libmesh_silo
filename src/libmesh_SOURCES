@@ -211,6 +211,7 @@ libmesh_SOURCES =  \
         src/mesh/postscript_io.C \
         src/mesh/serial_mesh.C \
         src/mesh/serial_mesh_iterators.C \
+        src/mesh/silo_io.C \
         src/mesh/tecplot_io.C \
         src/mesh/tetgen_io.C \
         src/mesh/ucd_io.C \

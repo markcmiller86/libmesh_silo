@@ -755,7 +755,7 @@ void UnstructuredMesh::write (const std::string& name,
         Nemesis_IO(*this).write(name);
 
       else if (name.rfind(".silo") < name.size())
-	SiloIO(*this,true).write(name);
+	SiloIO(*this).write(name);
     }
 
   // serial file formats
