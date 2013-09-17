@@ -26,17 +26,10 @@
 #include "libmesh/parallel.h"
 #include "libmesh/mesh_communication.h"
 
+using namespace Silo;
+
 namespace libMesh
 {
-
-
-//-----------------------------------------------
-// anonymous namespace for implementation details
-#warning DO WE NEED THIS
-namespace {
-
-}
-
 
 
 // ------------------------------------------------------------
@@ -49,7 +42,7 @@ SiloIO::SiloIO (MeshBase& mesh) :
 }
 
 
-#if defined(LIBMESH_HAVE_SILO_API)
+#if defined(LIBMESH_HAVE_SILO)
 void SiloIO::read (const std::string& base_filename)
 {
   START_LOG ("read()","SiloIO");
@@ -79,16 +72,49 @@ void SiloIO::read (const std::string& )
   libmesh_error();
 }
 
-#endif // #if defined(LIBMESH_HAVE_SILO_API)
+#endif // #if defined(LIBMESH_HAVE_SILO)
 
 
-#if defined(LIBMESH_HAVE_SILO_API)
+#if defined(LIBMESH_HAVE_SILO)
 
 void SiloIO::write (const std::string& base_filename)
 {
-  // Get a constant reference to the mesh for writing
-  const MeshBase & mesh = MeshOutput<MeshBase>::mesh();
+    // Get a constant reference to the mesh for writing
+    const MeshBase & mesh = MeshOutput<MeshBase>::mesh();
 
+    std::vector<Real> x, y, z;
+    dof_id_type num_nodes = mesh.n_nodes();
+    x.resize(num_nodes);
+    if (mesh.spatial_dimension() > 1)
+        y.resize(num_nodes);
+    if (mesh.spatial_dimension() > 2)
+        z.resize(num_nodes);
+
+    MeshBase::const_node_iterator       it  = mesh.active_nodes_begin();
+    const MeshBase::const_node_iterator end = mesh.active_nodes_end();
+
+    for (unsigned int i = 0; it!=end; it++, i++)
+    {
+        x[i] = (*(*it))(0);
+        if (mesh.spatial_dimension() > 1)
+            y[i] = (*(*it))(1);
+        if (mesh.spatial_dimension() > 2)
+            z[i] = (*(*it))(2);
+    }
+
+#warning MAY NEED TO TACK ON TIMESTEP TO FILENAME
+#warning HOW TO DECIDED DRIVER
+#warning MAY NOT NEED TO ALWAYS CREATE
+    DBfile *dbfile = DBCreate(base_filename.c_str(), 0, DB_LOCAL, "libmesh output", DB_PDB);
+    libmesh_assert(dbfile);
+
+    void* coords[3] = {&x[0], &y[0], &z[0]};
+    char* coordnames[3] = {"x","y","z"};
+    DBPutUcdmesh(dbfile, "lm_ucdmesh", mesh.spatial_dimension(), coordnames, coords,
+                       (int)num_nodes, (int)mesh.n_elem(), "zonelist", NULL,
+                        sizeof(Real)==4?DB_FLOAT:DB_DOUBLE, NULL);
+
+    DBClose(dbfile); 
 }
 
 void SiloIO::write_nodal_data (const std::string&,
@@ -113,6 +139,6 @@ void SiloIO::write_nodal_data (const std::string&,
   libmesh_error();
 }
 
-#endif // #if defined(LIBMESH_HAVE_SILO_API)
+#endif // #if defined(LIBMESH_HAVE_SILO)
 
 } // namespace libMesh

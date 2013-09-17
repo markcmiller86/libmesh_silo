@@ -21,6 +21,7 @@
 #define LIBMESH_SILO_IO_H
 
 // Local includes
+#include "libmesh/libmesh_config.h"
 #include "libmesh/libmesh_common.h"
 #include "libmesh/mesh_output.h"
 #include "libmesh/mesh_input.h"
@@ -28,10 +29,12 @@
 namespace libMesh
 {
 
+namespace Silo {
+#include "silo.h"
+}
+
 // Forward declarations
 class MeshBase;
-
-
 
 /**
  * This class implements writing meshes in the Silo format.
