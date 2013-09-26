@@ -111,8 +111,19 @@ void SiloIO::write (const std::string& base_filename)
     void* coords[3] = {&x[0], &y[0], &z[0]};
     char* coordnames[3] = {"x","y","z"};
     DBPutUcdmesh(dbfile, "lm_ucdmesh", mesh.spatial_dimension(), coordnames, coords,
-                       (int)num_nodes, (int)mesh.n_elem(), "zonelist", NULL,
+                       (int)num_nodes, (int)mesh.n_elem(), "lm_zonelist", NULL,
                         sizeof(Real)==4?DB_FLOAT:DB_DOUBLE, NULL);
+
+    MeshBase::const_elem_iterator       it2  = mesh.active_elems_begin();
+    const MeshBase::const_elem_iterator end2 = mesh.active_elems_end();
+
+    for (unsigned int i = 0; it!=end; it++, i++)
+    {
+    }
+
+    DBPutZonelist2(dbfile, "lm_zonelist", (int)mesh.n_elem(), mesh.spatial_dimension(),
+        &nodelist_g[0], (int) nodelist_g.size(), 0, 0, 0,
+        &shapetyp[0], &shapesize[0], &shapecnt[0], (int) shapetyp.size(), 0);
 
     DBClose(dbfile); 
 }

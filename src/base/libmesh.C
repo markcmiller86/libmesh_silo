@@ -429,9 +429,15 @@ LibMeshInit::LibMeshInit (int argc, const char* const* argv,
       // into a debugger with a proper stack when an MPI error occurs.
       if (libMesh::on_command_line ("--handle-mpi-errors"))
         {
+#if MPI_VERSION > 1
+	  MPI_Comm_create_errhandler(libMesh_MPI_Handler, &libmesh_errhandler);
+	  MPI_Comm_set_errhandler(libMesh::COMM_WORLD, libmesh_errhandler);
+	  MPI_Comm_set_errhandler(MPI_COMM_WORLD, libmesh_errhandler);
+#else
 	  MPI_Errhandler_create(libMesh_MPI_Handler, &libmesh_errhandler);
 	  MPI_Errhandler_set(libMesh::COMM_WORLD, libmesh_errhandler);
 	  MPI_Errhandler_set(MPI_COMM_WORLD, libmesh_errhandler);
+#endif // #if MPI_VERSION > 1
         }
     }
 
@@ -588,37 +594,6 @@ LibMeshInit::~LibMeshInit()
   // Let's be sure we properly close on every processor at once:
   libmesh_parallel_only(this->comm());
 
-#if defined(LIBMESH_HAVE_PETSC)
-      // Allow the user to bypass PETSc finalization
-  if (!libMesh::on_command_line ("--disable-petsc")
-#if defined(LIBMESH_HAVE_MPI)
-      && !libMesh::on_command_line ("--disable-mpi")
-#endif
-     )
-    {
-# if defined(LIBMESH_HAVE_SLEPC)
-      if (libmesh_initialized_slepc)
-        SlepcFinalize();
-# else
-      if (libmesh_initialized_petsc)
-        PetscFinalize();
-# endif
-    }
-#endif
-
-#if defined(LIBMESH_HAVE_MPI)
-  // Allow the user to bypass MPI finalization
-  if (!libMesh::on_command_line ("--disable-mpi"))
-    {
-      this->_comm.clear();
-#ifndef LIBMESH_DISABLE_COMMWORLD
-      Parallel::Communicator_World.clear();
-#endif
-
-      if (libmesh_initialized_mpi)
-	MPI_Finalize();
-    }
-#endif
 
   // Force the \p ReferenceCounter to print
   // its reference count information.  This allows
@@ -645,6 +620,12 @@ LibMeshInit::~LibMeshInit()
 
     }
 
+  //  print the perflog to individual processor's file.
+  libMesh::perflog.print_log();
+
+  // Now clear the logging object, we don't want it to print
+  // a second time during the PerfLog destructor.
+  libMesh::perflog.clear();
 
   // Reconnect the output streams
   // (don't do this, or we will get messages from objects
@@ -657,14 +638,6 @@ LibMeshInit::~LibMeshInit()
 
   if (libMesh::on_command_line ("--redirect-stdout"))
     {
-      // Before handing back the std stream buffers, print the
-      // perflog to the individual processor's files.
-      libMesh::perflog.print_log();
-
-      // Now clear the logging object, we don't want it to print
-      // a second time during the PerfLog destructor.
-      libMesh::perflog.clear();
-
       // If stdout/stderr were redirected to files, reset them now.
       libMesh::out.rdbuf (out_buf);
       libMesh::err.rdbuf (err_buf);
@@ -689,6 +662,39 @@ LibMeshInit::~LibMeshInit()
 
   if (libMesh::on_command_line("--enable-fpe"))
     enableFPE(false);
+
+#if defined(LIBMESH_HAVE_PETSC)
+    // Allow the user to bypass PETSc finalization
+    if (!libMesh::on_command_line ("--disable-petsc")
+#if defined(LIBMESH_HAVE_MPI)
+        && !libMesh::on_command_line ("--disable-mpi")
+#endif
+        )
+    {
+# if defined(LIBMESH_HAVE_SLEPC)
+        if (libmesh_initialized_slepc)
+            SlepcFinalize();
+# else
+        if (libmesh_initialized_petsc)
+            PetscFinalize();
+# endif
+    }
+#endif
+
+
+#if defined(LIBMESH_HAVE_MPI)
+    // Allow the user to bypass MPI finalization
+    if (!libMesh::on_command_line ("--disable-mpi"))
+    {
+        this->_comm.clear();
+#ifndef LIBMESH_DISABLE_COMMWORLD
+        Parallel::Communicator_World.clear();
+#endif
+
+        if (libmesh_initialized_mpi)
+            MPI_Finalize();
+    }
+#endif
 }
 
 
