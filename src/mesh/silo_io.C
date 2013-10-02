@@ -28,9 +28,50 @@
 
 using namespace Silo;
 
+typedef struct zt_pairs { ElemType lm_type; int silo_type; } zt_pairs;
+
+static const zt_pairs elem_types[] =
+{
+    {EDGE2,    DB_ZONETYPE_BEAM},
+    {TRI3,     DB_ZONETYPE_TRIANGLE},
+    {QUAD4,    DB_ZONETYPE_QUAD},
+    {TET4,     DB_ZONETYPE_TET},
+    {PYRAMID5, DB_ZONETYPE_PYRAMID},
+    {PRISM6,   DB_ZONETYPE_PRISM},
+    {HEX8,     DB_ZONETYPE_HEX}
+};
+static const int n_elem_types = sizeof(elem_types)/sizeof(elem_types[0]);
+
+static ElemType lm_elem_type(int st)
+{
+    static int lastidx = 0;
+    if (elem_types[lastidx].silo_type == st)
+        return elem_types[lastidx].lm_type;
+    for (int i = 0; i < n_elem_types; i++, lastidx++)
+    {
+        if (lastidx >= n_elem_types) lastidx = 0;
+        if (elem_types[lastidx].silo_type == st)
+            return elem_types[lastidx].lm_type;
+    }
+    return INVALID_ELEM;
+}
+
+static int silo_elem_type(const ElemType et)
+{
+    static int lastidx = 0;
+    if (elem_types[lastidx].lm_type == et)
+        return elem_types[lastidx].silo_type;
+    for (int i = 0; i < n_elem_types; i++, lastidx++)
+    {
+        if (lastidx >= n_elem_types) lastidx = 0;
+        if (elem_types[lastidx].lm_type == et)
+            return elem_types[lastidx].silo_type;
+    }
+    return -1;
+}
+
 namespace libMesh
 {
-
 
 // ------------------------------------------------------------
 // Silo class members
@@ -40,7 +81,6 @@ SiloIO::SiloIO (MeshBase& mesh) :
   ParallelObject (mesh)
 {
 }
-
 
 #if defined(LIBMESH_HAVE_SILO)
 void SiloIO::read (const std::string& base_filename)
@@ -111,19 +151,45 @@ void SiloIO::write (const std::string& base_filename)
     void* coords[3] = {&x[0], &y[0], &z[0]};
     char* coordnames[3] = {"x","y","z"};
     DBPutUcdmesh(dbfile, "lm_ucdmesh", mesh.spatial_dimension(), coordnames, coords,
-                       (int)num_nodes, (int)mesh.n_elem(), "lm_zonelist", NULL,
+                       (int)num_nodes, (int)mesh.n_elem(), "lm_zl", NULL,
                         sizeof(Real)==4?DB_FLOAT:DB_DOUBLE, NULL);
 
-    MeshBase::const_elem_iterator       it2  = mesh.active_elems_begin();
-    const MeshBase::const_elem_iterator end2 = mesh.active_elems_end();
-
-    for (unsigned int i = 0; it!=end; it++, i++)
+    std::vector<int> silo_nlst;
+    std::vector<int> silo_styp;
+    std::vector<int> silo_ssiz;
+    std::vector<int> silo_scnt;
+    std::map<ElemType, bool> silo_elem_types;
+    silo_elem_types[NODEELEM] = true;
+    ElemType cur_type = INVALID_ELEM;
+    int nelems = 0;
+    for (MeshBase::const_element_iterator it = mesh.active_elements_begin();
+          it != mesh.active_elements_end(); it++)
     {
+        const Elem * elem = *it ;
+
+#warning KEEP TRACK OF SKIPPED ELEMS FOR LATER ZONE-CENTERED VARIABLE OUTPUT
+        if (silo_elem_type(elem->type()) == -1) continue;
+
+        nelems++;
+
+        if (elem->type() != cur_type)
+        {
+            silo_styp.push_back(silo_elem_type(elem->type()));
+            silo_ssiz.push_back(elem->n_nodes());
+            silo_scnt.push_back(0);
+            cur_type = elem->type();
+        }
+        silo_scnt[silo_scnt.size()-1]++;
+        for (int i = 0; i < elem->n_nodes(); i++)
+            silo_nlst.push_back(elem->node(i));
     }
 
-    DBPutZonelist2(dbfile, "lm_zonelist", (int)mesh.n_elem(), mesh.spatial_dimension(),
-        &nodelist_g[0], (int) nodelist_g.size(), 0, 0, 0,
-        &shapetyp[0], &shapesize[0], &shapecnt[0], (int) shapetyp.size(), 0);
+    if (silo_nlst.size())
+    {
+        DBPutZonelist2 (dbfile, "lm_zl", nelems, mesh.spatial_dimension(),
+            &silo_nlst[0], (int) silo_nlst.size(), 0, 0, 0,
+            &silo_styp[0], &silo_ssiz[0], &silo_scnt[0], (int) silo_scnt.size(), 0);
+    }
 
     DBClose(dbfile); 
 }

@@ -70,8 +70,8 @@ namespace
         // QUAD4 equivalences
         element_equivalence_map["QUAD"]   = QUAD4;
         element_equivalence_map["QUAD4"]  = QUAD4;
-        // element_equivalence_map["SHELL"]  = QUAD4;
-        // element_equivalence_map["SHELL4"] = QUAD4;
+        element_equivalence_map["SHELL"]  = QUAD4;
+        element_equivalence_map["SHELL4"] = QUAD4;
 
         // QUAD8 equivalences
         element_equivalence_map["QUAD8"]  = QUAD8;
