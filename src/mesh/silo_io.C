@@ -169,9 +169,7 @@ void SiloIO::write (const std::string& base_filename)
 
 #warning KEEP TRACK OF SKIPPED ELEMS FOR LATER ZONE-CENTERED VARIABLE OUTPUT
         if (silo_elem_type(elem->type()) == -1) continue;
-
         nelems++;
-
         if (elem->type() != cur_type)
         {
             silo_styp.push_back(silo_elem_type(elem->type()));
@@ -180,8 +178,27 @@ void SiloIO::write (const std::string& base_filename)
             cur_type = elem->type();
         }
         silo_scnt[silo_scnt.size()-1]++;
-        for (int i = 0; i < elem->n_nodes(); i++)
-            silo_nlst.push_back(elem->node(i));
+        if (cur_type == PRISM6)
+        {
+            silo_nlst.push_back(elem->node(3));
+            silo_nlst.push_back(elem->node(0));
+            silo_nlst.push_back(elem->node(1));
+            silo_nlst.push_back(elem->node(4));
+            silo_nlst.push_back(elem->node(5));
+            silo_nlst.push_back(elem->node(2));
+        }
+        else if (cur_type == TET4)
+        {
+            silo_nlst.push_back(elem->node(1));
+            silo_nlst.push_back(elem->node(0));
+            silo_nlst.push_back(elem->node(2));
+            silo_nlst.push_back(elem->node(3));
+        }
+        else
+        {
+            for (int i = 0; i < elem->n_nodes(); i++)
+                silo_nlst.push_back(elem->node(i));
+        }
     }
 
     if (silo_nlst.size())

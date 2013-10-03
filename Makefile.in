@@ -10109,17 +10109,17 @@ meshbcid-opt$(EXEEXT): $(meshbcid_opt_OBJECTS) $(meshbcid_opt_DEPENDENCIES)
 	$(AM_V_CXXLD)$(meshbcid_opt_LINK) $(meshbcid_opt_OBJECTS) $(meshbcid_opt_LDADD) $(LIBS)
 src/apps/meshdiff_dbg-meshdiff.$(OBJEXT): src/apps/$(am__dirstamp) \
 	src/apps/$(DEPDIR)/$(am__dirstamp)
-meshdiff-dbg$(EXEEXT): $(meshdiff_dbg_OBJECTS) $(meshdiff_dbg_DEPENDENCIES) $(EXTRA_meshdiff_dbg_DEPENDENCIES) 
+meshdiff-dbg$(EXEEXT): $(meshdiff_dbg_OBJECTS) $(meshdiff_dbg_DEPENDENCIES) 
 	@rm -f meshdiff-dbg$(EXEEXT)
 	$(AM_V_CXXLD)$(meshdiff_dbg_LINK) $(meshdiff_dbg_OBJECTS) $(meshdiff_dbg_LDADD) $(LIBS)
 src/apps/meshdiff_devel-meshdiff.$(OBJEXT): src/apps/$(am__dirstamp) \
 	src/apps/$(DEPDIR)/$(am__dirstamp)
-meshdiff-devel$(EXEEXT): $(meshdiff_devel_OBJECTS) $(meshdiff_devel_DEPENDENCIES) $(EXTRA_meshdiff_devel_DEPENDENCIES) 
+meshdiff-devel$(EXEEXT): $(meshdiff_devel_OBJECTS) $(meshdiff_devel_DEPENDENCIES) 
 	@rm -f meshdiff-devel$(EXEEXT)
 	$(AM_V_CXXLD)$(meshdiff_devel_LINK) $(meshdiff_devel_OBJECTS) $(meshdiff_devel_LDADD) $(LIBS)
 src/apps/meshdiff_opt-meshdiff.$(OBJEXT): src/apps/$(am__dirstamp) \
 	src/apps/$(DEPDIR)/$(am__dirstamp)
-meshdiff-opt$(EXEEXT): $(meshdiff_opt_OBJECTS) $(meshdiff_opt_DEPENDENCIES) $(EXTRA_meshdiff_opt_DEPENDENCIES) 
+meshdiff-opt$(EXEEXT): $(meshdiff_opt_OBJECTS) $(meshdiff_opt_DEPENDENCIES) 
 	@rm -f meshdiff-opt$(EXEEXT)
 	$(AM_V_CXXLD)$(meshdiff_opt_LINK) $(meshdiff_opt_OBJECTS) $(meshdiff_opt_LDADD) $(LIBS)
 src/apps/meshid_dbg-meshid.$(OBJEXT): src/apps/$(am__dirstamp) \
@@ -10341,6 +10341,9 @@ mostlyclean-compile:
 	-rm -f src/apps/meshbcid_dbg-meshbcid.$(OBJEXT)
 	-rm -f src/apps/meshbcid_devel-meshbcid.$(OBJEXT)
 	-rm -f src/apps/meshbcid_opt-meshbcid.$(OBJEXT)
+	-rm -f src/apps/meshdiff_dbg-meshdiff.$(OBJEXT)
+	-rm -f src/apps/meshdiff_devel-meshdiff.$(OBJEXT)
+	-rm -f src/apps/meshdiff_opt-meshdiff.$(OBJEXT)
 	-rm -f src/apps/meshid_dbg-meshid.$(OBJEXT)
 	-rm -f src/apps/meshid_devel-meshid.$(OBJEXT)
 	-rm -f src/apps/meshid_opt-meshid.$(OBJEXT)
@@ -32644,44 +32647,50 @@ src/apps/meshbcid_opt-meshbcid.obj: src/apps/meshbcid.C
 src/apps/meshdiff_dbg-meshdiff.o: src/apps/meshdiff.C
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshdiff_dbg_CPPFLAGS) $(CPPFLAGS) $(meshdiff_dbg_CXXFLAGS) $(CXXFLAGS) -MT src/apps/meshdiff_dbg-meshdiff.o -MD -MP -MF src/apps/$(DEPDIR)/meshdiff_dbg-meshdiff.Tpo -c -o src/apps/meshdiff_dbg-meshdiff.o `test -f 'src/apps/meshdiff.C' || echo '$(srcdir)/'`src/apps/meshdiff.C
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/apps/$(DEPDIR)/meshdiff_dbg-meshdiff.Tpo src/apps/$(DEPDIR)/meshdiff_dbg-meshdiff.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/apps/meshdiff.C' object='src/apps/meshdiff_dbg-meshdiff.o' libtool=no @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/apps/meshdiff.C' object='src/apps/meshdiff_dbg-meshdiff.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshdiff_dbg_CPPFLAGS) $(CPPFLAGS) $(meshdiff_dbg_CXXFLAGS) $(CXXFLAGS) -c -o src/apps/meshdiff_dbg-meshdiff.o `test -f 'src/apps/meshdiff.C' || echo '$(srcdir)/'`src/apps/meshdiff.C
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshdiff_dbg_CPPFLAGS) $(CPPFLAGS) $(meshdiff_dbg_CXXFLAGS) $(CXXFLAGS) -c -o src/apps/meshdiff_dbg-meshdiff.o `test -f 'src/apps/meshdiff.C' || echo '$(srcdir)/'`src/apps/meshdiff.C
 
 src/apps/meshdiff_dbg-meshdiff.obj: src/apps/meshdiff.C
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshdiff_dbg_CPPFLAGS) $(CPPFLAGS) $(meshdiff_dbg_CXXFLAGS) $(CXXFLAGS) -MT src/apps/meshdiff_dbg-meshdiff.obj -MD -MP -MF src/apps/$(DEPDIR)/meshdiff_dbg-meshdiff.Tpo -c -o src/apps/meshdiff_dbg-meshdiff.obj `if test -f 'src/apps/meshdiff.C'; then $(CYGPATH_W) 'src/apps/meshdiff.C'; else $(CYGPATH_W) '$(srcdir)/src/apps/meshdiff.C'; fi`
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/apps/$(DEPDIR)/meshdiff_dbg-meshdiff.Tpo src/apps/$(DEPDIR)/meshdiff_dbg-meshdiff.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/apps/meshdiff.C' object='src/apps/meshdiff_dbg-meshdiff.obj' libtool=no @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/apps/meshdiff.C' object='src/apps/meshdiff_dbg-meshdiff.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshdiff_dbg_CPPFLAGS) $(CPPFLAGS) $(meshdiff_dbg_CXXFLAGS) $(CXXFLAGS) -c -o src/apps/meshdiff_dbg-meshdiff.obj `if test -f 'src/apps/meshdiff.C'; then $(CYGPATH_W) 'src/apps/meshdiff.C'; else $(CYGPATH_W) '$(srcdir)/src/apps/meshdiff.C'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshdiff_dbg_CPPFLAGS) $(CPPFLAGS) $(meshdiff_dbg_CXXFLAGS) $(CXXFLAGS) -c -o src/apps/meshdiff_dbg-meshdiff.obj `if test -f 'src/apps/meshdiff.C'; then $(CYGPATH_W) 'src/apps/meshdiff.C'; else $(CYGPATH_W) '$(srcdir)/src/apps/meshdiff.C'; fi`
 
 src/apps/meshdiff_devel-meshdiff.o: src/apps/meshdiff.C
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshdiff_devel_CPPFLAGS) $(CPPFLAGS) $(meshdiff_devel_CXXFLAGS) $(CXXFLAGS) -MT src/apps/meshdiff_devel-meshdiff.o -MD -MP -MF src/apps/$(DEPDIR)/meshdiff_devel-meshdiff.Tpo -c -o src/apps/meshdiff_devel-meshdiff.o `test -f 'src/apps/meshdiff.C' || echo '$(srcdir)/'`src/apps/meshdiff.C
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/apps/$(DEPDIR)/meshdiff_devel-meshdiff.Tpo src/apps/$(DEPDIR)/meshdiff_devel-meshdiff.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/apps/meshdiff.C' object='src/apps/meshdiff_devel-meshdiff.o' libtool=no @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/apps/meshdiff.C' object='src/apps/meshdiff_devel-meshdiff.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshdiff_devel_CPPFLAGS) $(CPPFLAGS) $(meshdiff_devel_CXXFLAGS) $(CXXFLAGS) -c -o src/apps/meshdiff_devel-meshdiff.o `test -f 'src/apps/meshdiff.C' || echo '$(srcdir)/'`src/apps/meshdiff.C
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshdiff_devel_CPPFLAGS) $(CPPFLAGS) $(meshdiff_devel_CXXFLAGS) $(CXXFLAGS) -c -o src/apps/meshdiff_devel-meshdiff.o `test -f 'src/apps/meshdiff.C' || echo '$(srcdir)/'`src/apps/meshdiff.C
 
 src/apps/meshdiff_devel-meshdiff.obj: src/apps/meshdiff.C
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshdiff_devel_CPPFLAGS) $(CPPFLAGS) $(meshdiff_devel_CXXFLAGS) $(CXXFLAGS) -MT src/apps/meshdiff_devel-meshdiff.obj -MD -MP -MF src/apps/$(DEPDIR)/meshdiff_devel-meshdiff.Tpo -c -o src/apps/meshdiff_devel-meshdiff.obj `if test -f 'src/apps/meshdiff.C'; then $(CYGPATH_W) 'src/apps/meshdiff.C'; else $(CYGPATH_W) '$(srcdir)/src/apps/meshdiff.C'; fi`
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/apps/$(DEPDIR)/meshdiff_devel-meshdiff.Tpo src/apps/$(DEPDIR)/meshdiff_devel-meshdiff.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/apps/meshdiff.C' object='src/apps/meshdiff_devel-meshdiff.obj' libtool=no @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/apps/meshdiff.C' object='src/apps/meshdiff_devel-meshdiff.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshdiff_devel_CPPFLAGS) $(CPPFLAGS) $(meshdiff_devel_CXXFLAGS) $(CXXFLAGS) -c -o src/apps/meshdiff_devel-meshdiff.obj `if test -f 'src/apps/meshdiff.C'; then $(CYGPATH_W) 'src/apps/meshdiff.C'; else $(CYGPATH_W) '$(srcdir)/src/apps/meshdiff.C'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshdiff_devel_CPPFLAGS) $(CPPFLAGS) $(meshdiff_devel_CXXFLAGS) $(CXXFLAGS) -c -o src/apps/meshdiff_devel-meshdiff.obj `if test -f 'src/apps/meshdiff.C'; then $(CYGPATH_W) 'src/apps/meshdiff.C'; else $(CYGPATH_W) '$(srcdir)/src/apps/meshdiff.C'; fi`
 
 src/apps/meshdiff_opt-meshdiff.o: src/apps/meshdiff.C
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshdiff_opt_CPPFLAGS) $(CPPFLAGS) $(meshdiff_opt_CXXFLAGS) $(CXXFLAGS) -MT src/apps/meshdiff_opt-meshdiff.o -MD -MP -MF src/apps/$(DEPDIR)/meshdiff_opt-meshdiff.Tpo -c -o src/apps/meshdiff_opt-meshdiff.o `test -f 'src/apps/meshdiff.C' || echo '$(srcdir)/'`src/apps/meshdiff.C
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/apps/$(DEPDIR)/meshdiff_opt-meshdiff.Tpo src/apps/$(DEPDIR)/meshdiff_opt-meshdiff.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/apps/meshdiff.C' object='src/apps/meshdiff_opt-meshdiff.o' libtool=no @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/apps/meshdiff.C' object='src/apps/meshdiff_opt-meshdiff.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshdiff_opt_CPPFLAGS) $(CPPFLAGS) $(meshdiff_opt_CXXFLAGS) $(CXXFLAGS) -c -o src/apps/meshdiff_opt-meshdiff.o `test -f 'src/apps/meshdiff.C' || echo '$(srcdir)/'`src/apps/meshdiff.C
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshdiff_opt_CPPFLAGS) $(CPPFLAGS) $(meshdiff_opt_CXXFLAGS) $(CXXFLAGS) -c -o src/apps/meshdiff_opt-meshdiff.o `test -f 'src/apps/meshdiff.C' || echo '$(srcdir)/'`src/apps/meshdiff.C
 
 src/apps/meshdiff_opt-meshdiff.obj: src/apps/meshdiff.C
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshdiff_opt_CPPFLAGS) $(CPPFLAGS) $(meshdiff_opt_CXXFLAGS) $(CXXFLAGS) -MT src/apps/meshdiff_opt-meshdiff.obj -MD -MP -MF src/apps/$(DEPDIR)/meshdiff_opt-meshdiff.Tpo -c -o src/apps/meshdiff_opt-meshdiff.obj `if test -f 'src/apps/meshdiff.C'; then $(CYGPATH_W) 'src/apps/meshdiff.C'; else $(CYGPATH_W) '$(srcdir)/src/apps/meshdiff.C'; fi`
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/apps/$(DEPDIR)/meshdiff_opt-meshdiff.Tpo src/apps/$(DEPDIR)/meshdiff_opt-meshdiff.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/apps/meshdiff.C' object='src/apps/meshdiff_opt-meshdiff.obj' libtool=no @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/apps/meshdiff.C' object='src/apps/meshdiff_opt-meshdiff.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshdiff_opt_CPPFLAGS) $(CPPFLAGS) $(meshdiff_opt_CXXFLAGS) $(CXXFLAGS) -c -o src/apps/meshdiff_opt-meshdiff.obj `if test -f 'src/apps/meshdiff.C'; then $(CYGPATH_W) 'src/apps/meshdiff.C'; else $(CYGPATH_W) '$(srcdir)/src/apps/meshdiff.C'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshdiff_opt_CPPFLAGS) $(CPPFLAGS) $(meshdiff_opt_CXXFLAGS) $(CXXFLAGS) -c -o src/apps/meshdiff_opt-meshdiff.obj `if test -f 'src/apps/meshdiff.C'; then $(CYGPATH_W) 'src/apps/meshdiff.C'; else $(CYGPATH_W) '$(srcdir)/src/apps/meshdiff.C'; fi`
 
 src/apps/meshid_dbg-meshid.o: src/apps/meshid.C
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(meshid_dbg_CPPFLAGS) $(CPPFLAGS) $(meshid_dbg_CXXFLAGS) $(CXXFLAGS) -MT src/apps/meshid_dbg-meshid.o -MD -MP -MF src/apps/$(DEPDIR)/meshid_dbg-meshid.Tpo -c -o src/apps/meshid_dbg-meshid.o `test -f 'src/apps/meshid.C' || echo '$(srcdir)/'`src/apps/meshid.C
