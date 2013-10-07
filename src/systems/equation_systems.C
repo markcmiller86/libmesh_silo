@@ -522,6 +522,12 @@ void EquationSystems::build_variable_names (std::vector<std::string>& var_names,
     // Here, we're assuming the number of vector components is the same
     // as the mesh dimension. Will break for mixed dimension meshes.
 
+#ifdef LIBMESH_USE_COMPLEX_NUMBERS
+    // If we have --enable-complex, then we triple nv because we want
+    // to write out the real, imaginary and absolute value for each variable
+    nv *= 3;
+#endif
+
     var_names.resize( nv );
   }
 
@@ -551,6 +557,9 @@ void EquationSystems::build_variable_names (std::vector<std::string>& var_names,
           // Filter on the type if requested
           if (type == NULL || (type && *type == fe_type))
             {
+
+#ifndef LIBMESH_USE_COMPLEX_NUMBERS
+            // Code path for writing out real-valued data
             if( FEInterface::field_type(fe_type) == TYPE_VECTOR )
 	      {
 	        switch(n_vec_dim)
@@ -574,7 +583,52 @@ void EquationSystems::build_variable_names (std::vector<std::string>& var_names,
 		  }
 	      }
 	    else
-	      var_names[var_num++] = var_name;
+	      {
+	        var_names[var_num++] = var_name;
+              }
+#else
+            // Code path for --enable-complex, since we need to write out 3 values per variable
+            if( FEInterface::field_type(fe_type) == TYPE_VECTOR )
+	      {
+	        switch(n_vec_dim)
+		  {
+		  case 0:
+		  case 1:
+		    var_names[var_num++] = var_name+"_r";
+		    var_names[var_num++] = var_name+"_i";
+		    var_names[var_num++] = var_name+"_a";
+		    break;
+		  case 2:
+		    var_names[var_num++] = var_name+"_x_r";
+		    var_names[var_num++] = var_name+"_x_i";
+		    var_names[var_num++] = var_name+"_x_a";
+		    var_names[var_num++] = var_name+"_y_r";
+		    var_names[var_num++] = var_name+"_y_i";
+		    var_names[var_num++] = var_name+"_y_a";
+		    break;
+		  case 3:
+		    var_names[var_num++] = var_name+"_x_r";
+		    var_names[var_num++] = var_name+"_x_i";
+		    var_names[var_num++] = var_name+"_x_a";
+		    var_names[var_num++] = var_name+"_y_r";
+		    var_names[var_num++] = var_name+"_y_i";
+		    var_names[var_num++] = var_name+"_y_a";
+		    var_names[var_num++] = var_name+"_z_r";
+		    var_names[var_num++] = var_name+"_z_i";
+		    var_names[var_num++] = var_name+"_z_a";
+		    break;
+		  default:
+		    libMesh::err << "Invalid dim in build_variable_names" << std::endl;
+		    libmesh_error();
+		  }
+	      }
+	    else
+	      {
+	        var_names[var_num++] = var_name+"_r";
+	        var_names[var_num++] = var_name+"_i";
+	        var_names[var_num++] = var_name+"_a";
+              }
+#endif
             }
 	}
     }
@@ -730,7 +784,14 @@ void EquationSystems::build_solution_vector (std::vector<Number>& soln,
     nv = n_scalar_vars + dim*n_vector_vars;
   }
 
-  soln.resize(nn*nv);
+#ifdef LIBMESH_USE_COMPLEX_NUMBERS
+    // If we're using --enable-complex, then we
+    // store real, imag and abs for each variable
+    soln.resize(3*nn*nv);
+#else
+    soln.resize(nn*nv);
+#endif
+
 
   // Zero out the soln vector
   std::fill (soln.begin(), soln.end(), libMesh::zero);
@@ -846,12 +907,29 @@ void EquationSystems::build_solution_vector (std::vector<Number>& soln,
 		    for (unsigned int n=0; n<elem->n_nodes(); n++)
 		      {
 			repeat_count[elem->node(n)]++;
+
+#ifndef LIBMESH_USE_COMPLEX_NUMBERS
+                        // Set entries of soln in the real-valued case
 			for( unsigned int d=0; d < n_vec_dim; d++ )
 			  {
 			    // For vector-valued elements, all components are in nodal_soln. For each
 			    // node, the components are stored in order, i.e. node_0 -> s0_x, s0_y, s0_z
 			    soln[nv*(elem->node(n)) + (var+d + var_num)] += nodal_soln[n_vec_dim*n+d];
 			  }
+#else
+                        // Set entries of soln in the complex-valued case
+			for( unsigned int d=0; d < n_vec_dim; d++ )
+			  {
+                            // We triple index in order to leave room for the real, imag and abs parts
+                            unsigned int index = 3*(nv*(elem->node(n)) + var + var_num);
+                            Number value = nodal_soln[n];
+                            soln[index]   += value.real();
+                            soln[index+1] += value.imag();
+                            soln[index+2] += std::abs(value);
+			  }
+#endif
+
+
 		      }
 		  }
 	      } // end loop over elements
@@ -867,8 +945,20 @@ void EquationSystems::build_solution_vector (std::vector<Number>& soln,
 
 	    for (unsigned int n=0; n<nn; n++)
 	      for( unsigned int d=0; d < n_vec_dim; d++ )
+	      {
+#ifndef LIBMESH_USE_COMPLEX_NUMBERS
 		soln[nv*n + (var+d + var_num)] /=
 		  static_cast<Real>(std::max (repeat_count[n], one));
+#else
+                Real repeat_count_for_node =
+                  static_cast<Real>(std::max (repeat_count[n], one));
+
+                unsigned int index = 3*(nv*n + var + d + var_num);
+                soln[index]   /= repeat_count_for_node;
+                soln[index+1] /= repeat_count_for_node;
+		soln[index+2] /= repeat_count_for_node;
+#endif
+              }
 
 	} // end loop on variables in this system
 

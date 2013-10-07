@@ -467,45 +467,12 @@ void GMVIO::write_ascii_new_impl (const std::string& fname,
 
       for (unsigned int c=0; c<n_vars; c++)
         {
-
-#ifdef LIBMESH_USE_COMPLEX_NUMBERS
-
-          // in case of complex data, write _three_ data sets
-          // for each component
-
-          // this is the real part
-          out_stream << "r_" << (*solution_names)[c] << " 1\n";
-
-          for (unsigned int n=0; n<mesh.n_nodes(); n++)
-            out_stream << (*v)[n*n_vars + c].real() << " ";
-
-          out_stream << "\n\n";
-
-          // this is the imaginary part
-          out_stream << "i_" << (*solution_names)[c] << " 1\n";
-
-          for (unsigned int n=0; n<mesh.n_nodes(); n++)
-            out_stream << (*v)[n*n_vars + c].imag() << " ";
-
-          out_stream << "\n\n";
-
-          // this is the magnitude
-          out_stream << "a_" << (*solution_names)[c] << " 1\n";
-          for (unsigned int n=0; n<mesh.n_nodes(); n++)
-            out_stream << std::abs((*v)[n*n_vars + c]) << " ";
-
-          out_stream << "\n\n";
-
-#else
-
           out_stream << (*solution_names)[c] << " 1\n";
 
           for (unsigned int n=0; n<mesh.n_nodes(); n++)
             out_stream << (*v)[n*n_vars + c] << " ";
 
           out_stream << "\n\n";
-
-#endif
         }
 
     }
@@ -1134,46 +1101,12 @@ void GMVIO::write_ascii_old_impl (const std::string& fname,
 
       for (unsigned int c=0; c<n_vars; c++)
 	{
-
-#ifdef LIBMESH_USE_COMPLEX_NUMBERS
-
-	  // in case of complex data, write _tree_ data sets
-	  // for each component
-
-	  // this is the real part
-	  out_stream << "r_" << (*solution_names)[c] << " 1\n";
-
-	  for (unsigned int n=0; n<mesh.n_nodes(); n++)
-	    out_stream << (*v)[n*n_vars + c].real() << " ";
-
-	  out_stream << '\n' << '\n';
-
-
-	  // this is the imaginary part
-	  out_stream << "i_" << (*solution_names)[c] << " 1\n";
-
-	  for (unsigned int n=0; n<mesh.n_nodes(); n++)
-	    out_stream << (*v)[n*n_vars + c].imag() << " ";
-
-	  out_stream << '\n' << '\n';
-
-	  // this is the magnitude
-	  out_stream << "a_" << (*solution_names)[c] << " 1\n";
-	  for (unsigned int n=0; n<mesh.n_nodes(); n++)
-	    out_stream << std::abs((*v)[n*n_vars + c]) << " ";
-
-	  out_stream << '\n' << '\n';
-
-#else
-
 	  out_stream << (*solution_names)[c] << " 1\n";
 
 	  for (unsigned int n=0; n<mesh.n_nodes(); n++)
 	    out_stream << (*v)[n*n_vars + c] << " ";
 
 	  out_stream << '\n' << '\n';
-
-#endif
 	}
 
     }
