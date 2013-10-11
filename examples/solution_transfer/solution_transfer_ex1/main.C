@@ -5,6 +5,7 @@
 #include "libmesh/explicit_system.h"
 #include "libmesh/equation_systems.h"
 #include "libmesh/exodusII_io.h"
+#include "libmesh/silo_io.h"
 #include "libmesh/libmesh_config.h"
 
 #ifdef LIBMESH_HAVE_DTK
@@ -35,7 +36,6 @@ int main(int argc, char* argv[])
 {
   LibMeshInit init (argc, argv);
 
-#ifdef LIBMESH_HAVE_DTK
 
   Mesh from_mesh(init.comm());
   MeshTools::Generation::build_cube(from_mesh, 4, 4, 4, 0, 1, 0, 1, 0, 1, HEX8);
@@ -46,7 +46,10 @@ int main(int argc, char* argv[])
   from_sys.attach_init_function(initialize);
   from_es.init();
 
-  ExodusII_IO(from_mesh).write_equation_systems("from.e", from_es);
+  //ExodusII_IO(from_mesh).write_equation_systems("from.e", from_es);
+  SiloIO(from_mesh).write_equation_systems("from.e", from_es);
+
+#ifdef LIBMESH_HAVE_DTK
 
   Mesh to_mesh;
   MeshTools::Generation::build_cube(to_mesh, 5, 5, 5, 0, 1, 0, 1, 0, 1, TET4);
@@ -55,6 +58,7 @@ int main(int argc, char* argv[])
   System & to_sys = to_es.add_system<ExplicitSystem>("To");
   unsigned int to_var = to_sys.add_variable("to");
   to_es.init();
+`
 
   DTKSolutionTransfer dtk_transfer;
 

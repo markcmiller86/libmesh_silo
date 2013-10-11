@@ -68,15 +68,12 @@ class SiloIO : public MeshInput<MeshBase>,
   explicit
   SiloIO (MeshBase&);
 
+  virtual ~SiloIO();
+
   /**
    * This method implements writing a mesh to a specified file.
    */
   virtual void write (const std::string& );
-
-   /**
-    * This method implements reading a mesh from a specified file.
-    */
-  virtual void read (const std::string& mesh_file);
 
   /**
    * This method implements writing a mesh with nodal data to a
@@ -86,7 +83,18 @@ class SiloIO : public MeshInput<MeshBase>,
 				 const std::vector<Number>&,
 				 const std::vector<std::string>&);
 
+   /**
+    * This method implements reading a mesh from a specified file.
+    */
+  virtual void read (const std::string& mesh_file);
+
 private:
+
+#if LIBMESH_HAVE_SILO
+  Silo::DBfile *get_file_handle(const std::string&);
+
+  Silo::DBfile *_dbfile;
+#endif
 
 };
 

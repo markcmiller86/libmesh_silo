@@ -80,45 +80,46 @@ SiloIO::SiloIO (MeshBase& mesh) :
   MeshOutput<MeshBase> (mesh, /*is_parallel_format=*/true),
   ParallelObject (mesh)
 {
+#if defined(LIBMESH_HAVE_SILO)
+    _dbfile = 0;
+#endif
 }
 
 #if defined(LIBMESH_HAVE_SILO)
+
+SiloIO::~SiloIO()
+{
+    if (_dbfile) DBClose(_dbfile);
+    _dbfile = 0;
+}
+
+DBfile *
+SiloIO::get_file_handle(const std::string& filename)
+{
+    if (_dbfile && std::string(_dbfile->pub.name) != filename)
+    {
+        DBClose(_dbfile);
+        _dbfile = 0;
+    }
+
+    if (!_dbfile)
+        _dbfile = DBCreate(filename.c_str(), 0, DB_LOCAL, "libmesh output", DB_PDB);
+
+    libmesh_assert(_dbfile);
+    return _dbfile;
+}
+
 void SiloIO::read (const std::string& base_filename)
 {
   START_LOG ("read()","SiloIO");
 
-  // This function must be run on all processors at once
-  parallel_object_only();
-
-  // Get a reference to the mesh.  We need to be specific
-  // since Nemesis_IO is multiply-inherited
-  // MeshBase& mesh = this->mesh();
-  MeshBase& mesh = MeshInput<MeshBase>::mesh();
-
-  // And if that didn't work, then we're actually reading into a
-  // SerialMesh, so forget about gathering neighboring elements
-  if (mesh.is_serial())
-    return;
-
-  // Gather neighboring elements so that the mesh has the proper "ghost" neighbor information.
-  MeshCommunication().gather_neighboring_elements(libmesh_cast_ref<ParallelMesh&>(mesh));
+  STOP_LOG ("read()","SiloIO");
 }
-
-#else
-
-void SiloIO::read (const std::string& )
-{
-  libMesh::err <<  "ERROR, Silo API is not defined!" << std::endl;
-  libmesh_error();
-}
-
-#endif // #if defined(LIBMESH_HAVE_SILO)
-
-
-#if defined(LIBMESH_HAVE_SILO)
 
 void SiloIO::write (const std::string& base_filename)
 {
+    START_LOG ("write()","SiloIO");
+
     // Get a constant reference to the mesh for writing
     const MeshBase & mesh = MeshOutput<MeshBase>::mesh();
 
@@ -145,8 +146,7 @@ void SiloIO::write (const std::string& base_filename)
 #warning MAY NEED TO TACK ON TIMESTEP TO FILENAME
 #warning HOW TO DECIDED DRIVER
 #warning MAY NOT NEED TO ALWAYS CREATE
-    DBfile *dbfile = DBCreate(base_filename.c_str(), 0, DB_LOCAL, "libmesh output", DB_PDB);
-    libmesh_assert(dbfile);
+    DBfile *dbfile = get_file_handle(base_filename);
 
     void* coords[3] = {&x[0], &y[0], &z[0]};
     char* coordnames[3] = {"x","y","z"};
@@ -178,6 +178,8 @@ void SiloIO::write (const std::string& base_filename)
             cur_type = elem->type();
         }
         silo_scnt[silo_scnt.size()-1]++;
+
+        // Handle element re-ordering for Silo
         if (cur_type == PRISM6)
         {
             silo_nlst.push_back(elem->node(3));
@@ -208,23 +210,67 @@ void SiloIO::write (const std::string& base_filename)
             &silo_styp[0], &silo_ssiz[0], &silo_scnt[0], (int) silo_scnt.size(), 0);
     }
 
-    DBClose(dbfile); 
+    STOP_LOG ("write()","SiloIO");
 }
 
-void SiloIO::write_nodal_data (const std::string&,
-                               const std::vector<Number>&,
-                               const std::vector<std::string>&)
+void SiloIO::write_nodal_data (const std::string& base_filename,
+                               const std::vector<Number>& soln,
+                               const std::vector<std::string>& names)
 {
+    START_LOG ("write_nodal_data()","SiloIO");
 
+    const MeshBase & mesh = MeshOutput<MeshBase>::mesh();
+
+    // Write the mesh
+    SiloIO::write(base_filename);
+
+    DBfile *dbfile = get_file_handle(base_filename);
+
+    int num_vars = libmesh_cast_int<int>(names.size());
+    dof_id_type num_nodes = mesh.n_nodes();
+
+    // The names of the variables to be output
+    std::vector<std::string> output_names = names;
+
+#if 0
+    if(_output_variables.size())
+      output_names = _output_variables;
+#endif
+
+    // This will count the number of variables actually output
+    for (int c=0; c<num_vars; c++)
+    {
+        std::vector<std::string>::iterator pos =
+            std::find(output_names.begin(), output_names.end(), names[c]);
+        if (pos == output_names.end())
+            continue;
+
+        // Copy out this variable's solution
+        std::vector<Number> cur_soln(num_nodes);
+        for(dof_id_type i=0; i<num_nodes; i++)
+          cur_soln[i] = soln[i*num_vars + c];
+
+        DBPutUcdvar1(dbfile, output_names[c].c_str(), "lm_ucdmesh",
+            &cur_soln[0], num_nodes, 0, 0, DB_DOUBLE, DB_NODECENT, 0);
+    }
+
+    STOP_LOG ("write_nodal_data()","SiloIO");
 }
 
-#else
+#else // #if defined(LIBMESH_HAVE_SILO)
+
+void SiloIO::read (const std::string& )
+{
+  libMesh::err <<  "ERROR, Silo API is not defined!" << std::endl;
+  libmesh_error();
+}
 
 void SiloIO::write (const std::string& )
 {
   libMesh::err <<  "ERROR, Silo API is not defined!" << std::endl;
   libmesh_error();
 }
+
 void SiloIO::write_nodal_data (const std::string&,
                                const std::vector<Number>&,
                                const std::vector<std::string>&)
