@@ -35,15 +35,16 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
+@LIBMESH_VPATH_BUILD_TRUE@am__append_1 = lshape.unv lshape_data.unv .linkstamp
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(top_srcdir)/examples/Make.common
 check_PROGRAMS = $(am__EXEEXT_1) $(am__EXEEXT_2) $(am__EXEEXT_3) \
 	$(am__EXEEXT_4) $(am__EXEEXT_5)
-@LIBMESH_DBG_MODE_TRUE@am__append_1 = example-dbg
-@LIBMESH_DEVEL_MODE_TRUE@am__append_2 = example-devel
-@LIBMESH_OPT_MODE_TRUE@am__append_3 = example-opt
-@LIBMESH_PROF_MODE_TRUE@am__append_4 = example-prof
-@LIBMESH_OPROF_MODE_TRUE@am__append_5 = example-oprof
+@LIBMESH_DBG_MODE_TRUE@am__append_2 = example-dbg
+@LIBMESH_DEVEL_MODE_TRUE@am__append_3 = example-devel
+@LIBMESH_OPT_MODE_TRUE@am__append_4 = example-opt
+@LIBMESH_PROF_MODE_TRUE@am__append_5 = example-prof
+@LIBMESH_OPROF_MODE_TRUE@am__append_6 = example-oprof
 subdir = examples/miscellaneous/miscellaneous_ex2
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ac_cxx_rtti.m4 \
@@ -518,7 +519,7 @@ vtkversion = @vtkversion@
 #
 # how to make documentation
 #
-CLEANFILES = $(example_name).php stdout.log
+CLEANFILES = $(am__append_1) $(example_name).php stdout.log
 example_name = miscellaneous_ex2
 install_dir = $(examples_install_path)/miscellaneous/ex2
 data = miscellaneous_ex2.C lshape.unv lshape_data.unv
@@ -526,6 +527,9 @@ sources = $(data) run.sh
 
 # conditionally enable this test
 @LIBMESH_ENABLE_COMPLEX_TRUE@check_SCRIPTS = run.sh
+
+# also need links for VPATH builds
+@LIBMESH_VPATH_BUILD_TRUE@BUILT_SOURCES = .linkstamp
 
 ######################################################################
 #
@@ -585,7 +589,8 @@ data_DATA = $(data) $(top_builddir)/contrib/utils/Makefile
 #
 TESTS_ENVIRONMENT = LIBMESH_DIR=$(abs_top_srcdir) METHODS="$(METHODS)"
 TESTS = $(check_SCRIPTS)
-all: all-am
+all: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) all-am
 
 .SUFFIXES:
 .SUFFIXES: .C .lo .o .obj
@@ -966,13 +971,15 @@ distdir: $(DISTFILES)
 check-am: all-am
 	$(MAKE) $(AM_MAKEFLAGS) $(check_PROGRAMS) $(check_SCRIPTS)
 	$(MAKE) $(AM_MAKEFLAGS) check-TESTS
-check: check-am
+check: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) check-am
 all-am: Makefile $(DATA)
 installdirs:
 	for dir in "$(DESTDIR)$(datadir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
-install: install-am
+install: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) install-am
 install-exec: install-exec-am
 install-data: install-data-am
 uninstall: uninstall-am
@@ -998,6 +1005,7 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
 clean: clean-am
 
 clean-am: clean-checkPROGRAMS clean-generic clean-libtool \
@@ -1067,7 +1075,7 @@ ps-am:
 
 uninstall-am: uninstall-dataDATA
 
-.MAKE: check-am install-am install-strip
+.MAKE: all check check-am install install-am install-strip
 
 .PHONY: CTAGS GTAGS all all-am check check-TESTS check-am clean \
 	clean-checkPROGRAMS clean-generic clean-libtool ctags \
@@ -1083,6 +1091,10 @@ uninstall-am: uninstall-dataDATA
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
 	tags uninstall uninstall-am uninstall-dataDATA
 
+@LIBMESH_VPATH_BUILD_TRUE@.linkstamp:
+@LIBMESH_VPATH_BUILD_TRUE@	-rm -f lshape.unv && $(LN_S) $(srcdir)/lshape.unv .
+@LIBMESH_VPATH_BUILD_TRUE@	-rm -f lshape_data.unv && $(LN_S) $(srcdir)/lshape_data.unv .
+@LIBMESH_VPATH_BUILD_TRUE@	$(AM_V_GEN)touch .linkstamp
 
 # Convenience method: 'make run'
 run: $(check_PROGRAMS)
